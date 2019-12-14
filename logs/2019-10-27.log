@@ -1,0 +1,342 @@
+INFO [2019-10-27 18:36:28] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 1228 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:36:28] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 1228 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.003991 real seconds 
+
+INFO [2019-10-27 18:37:10] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 13892 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:37:10] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 13892 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000998 real seconds 
+
+INFO [2019-10-27 18:37:53] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 16824 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:37:53] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 16824 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 18:38:14] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 9700 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:38:14] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 9700 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 18:38:55] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 17396 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:38:55] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 17396 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000999 real seconds 
+
+INFO [2019-10-27 18:39:16] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 11300 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:39:16] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 11300 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 18:39:30] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 8072 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:39:30] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 8072 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 18:40:40] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 11628 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:40:40] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 11628 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-27 18:41:53] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 14504 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:41:53] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 14504 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000998 real seconds 
+
+INFO [2019-10-27 18:43:25] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 16440 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:43:25] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 16440 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001000 real seconds 
+
+INFO [2019-10-27 18:44:20] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 1532 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:44:20] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 1532 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000998 real seconds 
+
+INFO [2019-10-27 18:45:08] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 1348 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:45:08] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 1348 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 18:46:12] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 5356 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:46:12] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 5356 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001003 real seconds 
+
+INFO [2019-10-27 18:46:44] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 14648 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:46:44] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 14648 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001997 real seconds 
+
+INFO [2019-10-27 18:47:03] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 13096 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:47:03] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 13096 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 18:47:18] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 16604 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:47:18] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 16604 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-27 18:47:27] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 10552 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:47:27] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 10552 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 18:47:58] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 14676 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:47:58] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 14676 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001995 real seconds 
+
+INFO [2019-10-27 18:48:49] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 17348 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:48:49] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 17348 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 18:51:06] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 14648 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:51:06] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 14648 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001993 real seconds 
+
+INFO [2019-10-27 18:51:30] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 9020 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:51:30] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 9020 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000998 real seconds 
+
+INFO [2019-10-27 18:52:01] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 1484 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:52:01] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 1484 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000996 real seconds 
+
+INFO [2019-10-27 18:52:16] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 4792 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:52:16] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 4792 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 18:52:27] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 14428 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:52:27] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 14428 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000998 real seconds 
+
+INFO [2019-10-27 18:52:40] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 1256 
+ 	 返回报文:b'Cwz8XlknmH2+jdXexfbyyofrfhXoCZI/G0l1xwGpLXb54d7Ge9Lj/4dPT0hwJVi7DkPJ4FHvz5AvSr7FKtW8EjBd0L4QnEad656rchyXytY=' 
+
+INFO [2019-10-27 18:52:40] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 12316 1256 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-27 18:53:36] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 5876 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-27 18:53:36] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 5876 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-27 18:56:04] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 15260 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-27 18:56:04] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 15260 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 18:57:41] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 17704 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-27 18:57:41] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 17704 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-27 18:57:52] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 13508 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-27 18:57:52] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 13508 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-27 19:05:31] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 4524 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-27 19:05:31] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 4524 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001993 real seconds 
+
+INFO [2019-10-27 19:05:37] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 6088 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-27 19:05:37] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 6088 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000998 real seconds 
+
+INFO [2019-10-27 19:07:46] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 17908 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-27 19:07:46] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 17908 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000992 real seconds 
+
+INFO [2019-10-28 10:38:23] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 15184 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:38:23] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 15184 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.009973 real seconds 
+
+INFO [2019-10-28 10:38:32] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 15040 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:38:32] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 15040 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-28 10:38:56] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 13408 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:38:56] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 13408 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-28 10:39:05] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 8704 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:39:05] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 8704 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-28 10:39:11] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 15584 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:39:11] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 15584 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001997 real seconds 
+
+INFO [2019-10-28 10:40:19] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 19820 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:40:19] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 19820 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000998 real seconds 
+
+INFO [2019-10-28 10:41:34] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 15792 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:41:34] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 15792 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001992 real seconds 
+
+INFO [2019-10-28 10:42:39] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 18572 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:42:39] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 18572 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-28 10:43:03] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 7116 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:43:03] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 7116 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001994 real seconds 
+
+INFO [2019-10-28 10:43:25] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 9020 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:43:25] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 9020 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.002000 real seconds 
+
+INFO [2019-10-28 10:44:22] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 3876 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:44:22] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 3876 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.002004 real seconds 
+
+INFO [2019-10-28 10:44:35] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 19172 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:44:35] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 19172 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000998 real seconds 
+
+INFO [2019-10-28 10:44:38] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 17668 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:44:38] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 17668 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000996 real seconds 
+
+INFO [2019-10-28 10:45:06] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 19304 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:45:06] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 19304 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001994 real seconds 
+
+INFO [2019-10-28 10:45:22] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 19424 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:45:22] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 19424 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000999 real seconds 
+
+INFO [2019-10-28 10:45:48] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 7848 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:45:48] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 7848 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-28 10:46:37] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 17748 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:46:37] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 17748 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-28 10:46:45] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 1932 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:46:45] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 1932 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-28 10:48:02] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 11160 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:48:02] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 11160 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-28 10:48:49] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 20032 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:48:49] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 20032 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-28 10:49:37] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 12076 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:49:37] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 12076 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001992 real seconds 
+
+INFO [2019-10-28 10:49:46] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 14844 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:49:46] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 14844 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-28 10:50:20] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 9532 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:50:20] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 9532 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001996 real seconds 
+
+INFO [2019-10-28 10:50:48] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 19964 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:50:48] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 19964 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.000998 real seconds 
+
+INFO [2019-10-28 10:51:15] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 252 
+ 	 返回报文:b'BaH9K1IaSYFTf8PfPNdrT4wD4O9VtftXfwGFCIUccuAdPfWz8Rj3E1ahCig9hbKYH6+nwyMnYtimeG182qUpNcRlPvCy9ueaEagtmuup5f8uHhPEoe/b1M001eS+s6eW' 
+
+INFO [2019-10-28 10:51:15] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17608 252 
+ 	 [FilterAPIView : getHomeBaseData]Training complete in 0.001996 real seconds 
+

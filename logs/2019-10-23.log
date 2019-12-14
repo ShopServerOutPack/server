@@ -1,0 +1,105 @@
+ERROR [2019-10-23 22:36:30] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 7828 9120 
+ 	 [UserAPIView : test  ] : [请求报文有误!];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 126 in wrapper
+kwargs=self.__request_validate(request,**kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 58 in __request_validate
+raise PubErrorCustom("请求报文有误!")
+ 
+
+ERROR [2019-10-23 22:37:00] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 9096 14268 
+ 	 [UserAPIView : test  ] : ['Core_connector' object has no attribute 'transaction'];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 127 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 79 in __run
+if self.transaction:
+ 
+
+INFO [2019-10-23 22:37:16] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 10596 4896 
+ 	 返回报文:None 
+
+INFO [2019-10-23 22:37:16] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 10596 4896 
+ 	 [UserAPIView : test]Training complete in 0.000000 real seconds 
+
+ERROR [2019-10-23 22:37:46] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 6552 10276 
+ 	 [UserAPIView : test  ] : ['Core_connector' object has no attribute 'pagination'];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 127 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 86 in __run
+((self.pagination and isinstance(res['data'], list)) or (
+ 
+
+INFO [2019-10-23 22:38:15] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 6752 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-23 22:38:15] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 6752 
+ 	 [UserAPIView : test]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-23 22:38:23] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 9836 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-23 22:38:23] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 9836 
+ 	 [UserAPIView : test]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-23 22:41:40] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 9032 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-23 22:41:40] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 9032 
+ 	 [UserAPIView : test]Training complete in 0.000996 real seconds 
+
+INFO [2019-10-24 00:40:15] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 6740 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-24 00:40:15] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 6740 
+ 	 [UserAPIView : test]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-24 00:45:17] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 9756 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-24 00:45:17] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 9756 
+ 	 [UserAPIView : test]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-24 00:45:43] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 12724 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-24 00:45:43] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 12724 
+ 	 [UserAPIView : test]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-24 00:46:01] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 13540 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-24 00:46:01] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 13540 
+ 	 [UserAPIView : test]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-24 00:46:11] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 11072 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-24 00:46:11] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 11072 
+ 	 [UserAPIView : test]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-24 00:47:28] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 9360 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-24 00:47:28] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 9360 
+ 	 [UserAPIView : test]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-24 00:50:23] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 12628 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-24 00:50:23] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 12628 
+ 	 [UserAPIView : test]Training complete in 0.000000 real seconds 
+
+INFO [2019-10-24 00:51:04] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 15488 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-24 00:51:04] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 15488 
+ 	 [UserAPIView : test]Training complete in 0.000997 real seconds 
+
+INFO [2019-10-24 00:55:59] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 14356 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-24 00:55:59] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 14356 
+ 	 [UserAPIView : test]Training complete in 0.000996 real seconds 
+
+INFO [2019-10-24 00:57:13] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 14840 
+ 	 返回报文:{'name': 'zhangfei'} 
+
+INFO [2019-10-24 00:57:13] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 4852 14840 
+ 	 [UserAPIView : test]Training complete in 0.000997 real seconds 
+

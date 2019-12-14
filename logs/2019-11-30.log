@@ -1,0 +1,36 @@
+INFO [2019-11-30 10:54:11] C:\Users\Tc\Desktop\CurrentProject\Server\lib\utils\log.py 38 info 2548 16260 
+ 	 返回报文:b'QV07JXnIV7fZhiEEJl1yGtbOClWAChglestEfC24OdyHGWY/3lD7DHmrkLJ0LSZKVZ69dvIyTg9PqzDtYTxh3tuA3kyGjavH3AixBG5VJ4gFGP7R5zW4v6EfyWjw0GFAPjIjD+C1GrSce8NwN5PaOpGZXYeE+pmHVzFXrSZzkWSP6yFx3udmsrIeUkOt73JvF+Fo5o1SE1QzzpwwM9aSCBqS+HbUgR98d4afWQY0PUw=' 
+
+INFO [2019-11-30 10:54:11] C:\Users\Tc\Desktop\CurrentProject\Server\lib\utils\log.py 38 info 2548 16260 
+ 	 [SsoAPIView : refeshToken]Training complete in 0.047873 real seconds 
+
+INFO [2019-11-30 12:34:12] C:\Users\Tc\Desktop\CurrentProject\Server\lib\utils\log.py 38 info 2548 13980 
+ 	 返回报文:b'v/Nk5xmjgywfWBLF/Arot9yj4jg1oI4voWRhZgS//1H40A0WmOTEmHN/qohqa3WrDgCp36/AKbUkRTOW+/+SdWD3CyNzhuMJz1lre3pAszuOBZPKNiqcRfJ9KNO0Znl++UZwfkbhIW286iaq5p2NQXnlN/dtmzZ5llI6g7h2ubWRY0AEVP7Nqc/EKduITI78PxnQ4kz9Oa0IAXr0khwT7H3UIGIGyhnTiNXQAYs/gzI=' 
+
+INFO [2019-11-30 12:34:12] C:\Users\Tc\Desktop\CurrentProject\Server\lib\utils\log.py 38 info 2548 13980 
+ 	 [SsoAPIView : refeshToken]Training complete in 0.002254 real seconds 
+
+ERROR [2019-11-30 14:06:31] C:\Users\Tc\Desktop\CurrentProject\Server\lib\utils\log.py 31 error 2548 6104 
+ 	 [FilterWebAPIView : getMenu  ] : [[Errno 22] Invalid argument];C:\Users\Tc\Desktop\CurrentProject\Server\lib\core\decorator\response.py line: 193 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\CurrentProject\Server\lib\core\decorator\response.py line: 149 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\CurrentProject\Server\app\filter\webapi.py line: 22 in getMenu
+print(type)
+ 
+
+ERROR [2019-11-30 14:06:33] C:\Users\Tc\Desktop\CurrentProject\Server\lib\utils\log.py 31 error 2548 17316 
+ 	 [FilterWebAPIView : getMenu  ] : [[Errno 22] Invalid argument];C:\Users\Tc\Desktop\CurrentProject\Server\lib\core\decorator\response.py line: 193 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\CurrentProject\Server\lib\core\decorator\response.py line: 149 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\CurrentProject\Server\app\filter\webapi.py line: 22 in getMenu
+print(type)
+ 
+
+INFO [2019-11-30 14:14:12] C:\Users\Tc\Desktop\CurrentProject\Server\lib\utils\log.py 38 info 2548 14496 
+ 	 返回报文:b'R7Wd/fac1oCcwJhVMv/5/X00eNdhblU0dFT780P2OR5onnWlHRaYIiX93c0Ha/m7S2xcGWZGCSum1a3YuU8qHUuEEuI+yMzrHwoF8u38OZrb1yE9J6+jNPOlKG+2LD8wdcxJMQFwWXGvd48G6YFUaes3GpvIDP2BV1OmDZmu26tLu1wF3H793n0i9NTdpSScWXcuaNAOA3iypopr2eZrvZGbK1bojdfSQWRQnsS4jH8=' 
+
+INFO [2019-11-30 14:14:12] C:\Users\Tc\Desktop\CurrentProject\Server\lib\utils\log.py 38 info 2548 14496 
+ 	 [SsoAPIView : refeshToken]Training complete in 0.015793 real seconds 
+

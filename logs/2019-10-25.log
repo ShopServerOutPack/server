@@ -1,0 +1,595 @@
+ERROR [2019-10-25 17:33:16] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 19248 19224 
+ 	 [GoodsAPIView : test  ] : ['Recursion' object has no attribute 'run'];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+Recursion(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+ 
+
+ERROR [2019-10-25 17:33:26] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 19248 18868 
+ 	 [GoodsAPIView : test  ] : ['Recursion' object has no attribute 'run'];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+Recursion(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+ 
+
+ERROR [2019-10-25 17:33:45] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 16316 19040 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object does not support item assignment];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 38 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 27 in Handler
+itemChild['child'] = list()
+ 
+
+ERROR [2019-10-25 17:34:32] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 1728 19128 
+ 	 [GoodsAPIView : test  ] : ['list' object has no attribute 'idKey'];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 38 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 29 in Handler
+getattr(itemChild, child.idKey)))
+ 
+
+ERROR [2019-10-25 17:35:27] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 11476 18796 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 38 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 29 in Handler
+getattr(itemChild, self.idKey)))
+ 
+
+ERROR [2019-10-25 17:37:22] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 3616 5736 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 40 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 31 in Handler
+getattr(itemChild, self.idKey)))
+ 
+
+ERROR [2019-10-25 17:37:47] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 3616 19416 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 40 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 31 in Handler
+getattr(itemChild, self.idKey)))
+ 
+
+INFO [2019-10-25 17:38:33] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 8256 11516 
+ 	 返回报文:None 
+
+INFO [2019-10-25 17:38:33] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 8256 11516 
+ 	 [GoodsAPIView : test]Training complete in 0.014960 real seconds 
+
+INFO [2019-10-25 17:39:56] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 13752 12576 
+ 	 返回报文:None 
+
+INFO [2019-10-25 17:39:56] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 13752 12576 
+ 	 [GoodsAPIView : test]Training complete in 0.009974 real seconds 
+
+ERROR [2019-10-25 17:40:42] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 3060 6788 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 42 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 30 in Handler
+obj=eval("{}.objects.filter({}={})".format(self.objModle, self.idLastKey ,getattr(itemChild, self.idKey)))
+ 
+
+ERROR [2019-10-25 17:42:27] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 5180 17756 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 43 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 31 in Handler
+# obj=eval("{}.objects.filter({}={})".format(self.objModle, self.idLastKey ,getattr(itemChild, self.idKey)))
+ 
+
+ERROR [2019-10-25 17:42:33] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 5180 3420 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 43 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 31 in Handler
+# obj=eval("{}.objects.filter({}={})".format(self.objModle, self.idLastKey ,getattr(itemChild, self.idKey)))
+ 
+
+ERROR [2019-10-25 17:43:13] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 16300 16648 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 42 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 30 in Handler
+obj=eval("({}).objects.filter({}={})".format(self.objModle, self.idLastKey ,getattr(itemChild, self.idKey)))
+ 
+
+ERROR [2019-10-25 17:43:38] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 13640 6364 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 42 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 30 in Handler
+obj=eval("{}.objects.filter()".format(self.objModle))
+ 
+
+ERROR [2019-10-25 17:44:40] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 1456 10288 
+ 	 [GoodsAPIView : test  ] : [tuple index out of range];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 42 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 30 in Handler
+obj=eval("(self.objModle).objects.filter({}={})".format(self.objModle),self.idLastKey,getattr(itemChild, self.idKey))
+ 
+
+ERROR [2019-10-25 17:45:11] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 8064 4660 
+ 	 [GoodsAPIView : test  ] : [globals must be a dict];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 42 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 30 in Handler
+obj=eval("(self.objModle).objects.filter(gdcglastid={})".format(self.objModle),getattr(itemChild, self.idKey))
+ 
+
+ERROR [2019-10-25 17:46:26] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 17916 17272 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 42 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 30 in Handler
+obj=eval("(self.objModle).objects.filter({}=1)".format(self.objModle,self.idLastKey))
+ 
+
+ERROR [2019-10-25 17:48:00] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 18740 16964 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 43 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 31 in Handler
+obj=eval("(self.objModle).objects.filter({}=1)".format(self.objModle,self.idLastKey))
+ 
+
+ERROR [2019-10-25 17:48:35] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 15508 18908 
+ 	 [GoodsAPIView : test  ] : [invalid syntax (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 43 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 31 in Handler
+obj=eval("(self.objModle).objects.filter(({})=1)".format(self.objModle,self.idLastKey))
+ 
+
+ERROR [2019-10-25 17:50:05] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 2396 19004 
+ 	 [GoodsAPIView : test  ] : [keyword can't be an expression (<string>, line 1)];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 43 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 31 in Handler
+obj=eval("(self.objModle).objects.filter(self.idLastKey=1)".format(self.objModle))
+ 
+
+INFO [2019-10-25 17:53:26] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 18752 17516 
+ 	 返回报文:None 
+
+INFO [2019-10-25 17:53:26] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 18752 17516 
+ 	 [GoodsAPIView : test]Training complete in 0.011968 real seconds 
+
+INFO [2019-10-25 17:54:17] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 3052 17872 
+ 	 返回报文:None 
+
+INFO [2019-10-25 17:54:17] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 3052 17872 
+ 	 [GoodsAPIView : test]Training complete in 0.014960 real seconds 
+
+ERROR [2019-10-25 17:54:35] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 16764 19276 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not subscriptable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 16 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 43 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 36 in Handler
+itemChild['child'].append(itemObj)
+ 
+
+ERROR [2019-10-25 17:55:52] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 19304 12432 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not subscriptable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 16 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 43 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 36 in Handler
+itemChild['child'].append(itemObj)
+ 
+
+ERROR [2019-10-25 17:56:27] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 7460 1440 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not subscriptable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 16 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 44 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 37 in Handler
+itemChild['child'].append(itemObj)
+ 
+
+ERROR [2019-10-25 17:56:32] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 7460 18276 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not subscriptable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 16 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 44 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 37 in Handler
+itemChild['child'].append(itemObj)
+ 
+
+ERROR [2019-10-25 17:56:50] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 8372 15328 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not subscriptable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 16 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 44 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 37 in Handler
+itemChild['child'].append(itemObj)
+ 
+
+ERROR [2019-10-25 17:58:50] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 19048 2108 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not subscriptable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 16 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 44 in run
+self.Handler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 37 in Handler
+itemChild['child'].append(itemObj)
+ 
+
+INFO [2019-10-25 17:59:33] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17984 256 
+ 	 返回报文:None 
+
+INFO [2019-10-25 17:59:33] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17984 256 
+ 	 [GoodsAPIView : test]Training complete in 0.026931 real seconds 
+
+INFO [2019-10-25 17:59:39] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17984 19224 
+ 	 返回报文:None 
+
+INFO [2019-10-25 17:59:39] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 17984 19224 
+ 	 [GoodsAPIView : test]Training complete in 0.012965 real seconds 
+
+INFO [2019-10-25 18:01:13] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 10768 14020 
+ 	 返回报文:None 
+
+INFO [2019-10-25 18:01:13] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 10768 14020 
+ 	 [GoodsAPIView : test]Training complete in 0.014959 real seconds 
+
+ERROR [2019-10-25 18:22:47] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 3060 11732 
+ 	 [GoodsAPIView : test  ] : ['list' object has no attribute 'child'];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 16 in test
+RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 63 in run
+self.durationHandler(child)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 58 in durationHandler
+self.durationHandler([current])
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 47 in durationHandler
+itemChild.child = list()
+ 
+
+INFO [2019-10-25 18:27:28] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 15792 10128 
+ 	 返回报文:None 
+
+INFO [2019-10-25 18:27:28] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 15792 10128 
+ 	 [GoodsAPIView : test]Training complete in 0.019492 real seconds 
+
+INFO [2019-10-25 18:29:46] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 11144 16224 
+ 	 返回报文:None 
+
+INFO [2019-10-25 18:29:46] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 11144 16224 
+ 	 [GoodsAPIView : test]Training complete in 0.010972 real seconds 
+
+INFO [2019-10-25 18:34:52] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 2020 17228 
+ 	 返回报文:None 
+
+INFO [2019-10-25 18:34:52] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 2020 17228 
+ 	 [GoodsAPIView : test]Training complete in 0.012964 real seconds 
+
+ERROR [2019-10-25 18:52:55] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 12664 17528 
+ 	 [GoodsAPIView : test  ] : ['NoneType' object is not callable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 18 in test
+return  {"data":RecursionForModle(headObj=GoodsCateGory.objects.get(gdcgid=1),queryNumber=2,objModle=GoodsCateGory,idKey='gdcgid',idLastKey="gdcglastid").run()}
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 86 in run
+self.depthHandler(self.headObj)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 49 in depthHandler
+child.child.append(self.serialiersHandler(itemObj))
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 82 in serialiersHandler
+return (self.serialiers)(obj,many=True).data
+ 
+
+ERROR [2019-10-25 18:54:06] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 15592 11144 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not iterable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 24 in test
+serialiers=GoodsCateGoryModelSerializer).run()}
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 86 in run
+self.depthHandler(self.headObj)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 49 in depthHandler
+child.child.append(self.serialiersHandler(itemObj))
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 82 in serialiersHandler
+return (self.serialiers)(obj,many=True).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 765 in data
+ret = super(ListSerializer, self).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 262 in data
+self._data = self.to_representation(self.instance)
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 683 in to_representation
+self.child.to_representation(item) for item in iterable
+ 
+
+ERROR [2019-10-25 18:57:37] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 8200 11100 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not iterable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 24 in test
+serialiers=GoodsCateGoryModelSerializer).run()}
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 86 in run
+baseObj = self.serialiersHandler(self.headObj)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 82 in serialiersHandler
+return (self.serialiers)(obj,many=True).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 765 in data
+ret = super(ListSerializer, self).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 262 in data
+self._data = self.to_representation(self.instance)
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 683 in to_representation
+self.child.to_representation(item) for item in iterable
+ 
+
+ERROR [2019-10-25 18:58:13] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 7880 18952 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not iterable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 24 in test
+serialiers=GoodsCateGoryModelSerializer).run()}
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 86 in run
+baseObj = self.serialiersHandler(self.headObj)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 82 in serialiersHandler
+return self.serialiers(obj,many=True).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 765 in data
+ret = super(ListSerializer, self).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 262 in data
+self._data = self.to_representation(self.instance)
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 683 in to_representation
+self.child.to_representation(item) for item in iterable
+ 
+
+ERROR [2019-10-25 18:58:25] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 7880 13548 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not iterable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 24 in test
+serialiers=GoodsCateGoryModelSerializer).run()}
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 86 in run
+baseObj = self.serialiersHandler(self.headObj)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 82 in serialiersHandler
+return self.serialiers(obj,many=True).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 765 in data
+ret = super(ListSerializer, self).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 262 in data
+self._data = self.to_representation(self.instance)
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 683 in to_representation
+self.child.to_representation(item) for item in iterable
+ 
+
+ERROR [2019-10-25 18:59:40] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 14864 12444 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not iterable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 17 in test
+return GoodsCateGoryModelSerializer(GoodsCateGory.objects.get(gdcgid=1),many=True).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 765 in data
+ret = super(ListSerializer, self).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 262 in data
+self._data = self.to_representation(self.instance)
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 683 in to_representation
+self.child.to_representation(item) for item in iterable
+ 
+
+INFO [2019-10-25 18:59:59] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 7868 17528 
+ 	 返回报文:None 
+
+INFO [2019-10-25 18:59:59] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 7868 17528 
+ 	 [GoodsAPIView : test]Training complete in 0.014958 real seconds 
+
+INFO [2019-10-25 19:00:02] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 7868 18000 
+ 	 返回报文:None 
+
+INFO [2019-10-25 19:00:02] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 7868 18000 
+ 	 [GoodsAPIView : test]Training complete in 0.023935 real seconds 
+
+ERROR [2019-10-25 19:00:59] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 16152 2264 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not iterable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 23 in test
+serialiers=GoodsCateGoryModelSerializer).run()}
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 86 in run
+baseObj = self.serialiersHandler(self.headObj)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 82 in serialiersHandler
+return self.serialiers(obj,many=True).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 765 in data
+ret = super(ListSerializer, self).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 262 in data
+self._data = self.to_representation(self.instance)
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 683 in to_representation
+self.child.to_representation(item) for item in iterable
+ 
+
+ERROR [2019-10-25 19:01:10] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 16152 2484 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object is not iterable];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 23 in test
+serialiers=GoodsCateGoryModelSerializer).run()}
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 86 in run
+baseObj = self.serialiersHandler(self.headObj)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 82 in serialiersHandler
+return self.serialiers(obj,many=True).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 765 in data
+ret = super(ListSerializer, self).data
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 262 in data
+self._data = self.to_representation(self.instance)
+;C:\Users\Tc\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\serializers.py line: 683 in to_representation
+self.child.to_representation(item) for item in iterable
+ 
+
+INFO [2019-10-25 19:01:20] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 18592 11320 
+ 	 返回报文:{'id': 1, 'userid': 1, 'gdcgid': 1, 'gdcgname': '1', 'gdcglastid': 0, 'level': 1, 'createtime': 1571995893, 'updtime': 1571995893} 
+
+INFO [2019-10-25 19:01:20] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 18592 11320 
+ 	 [GoodsAPIView : test]Training complete in 0.014960 real seconds 
+
+INFO [2019-10-25 19:01:23] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 18592 19312 
+ 	 返回报文:{'id': 1, 'userid': 1, 'gdcgid': 1, 'gdcgname': '1', 'gdcglastid': 0, 'level': 1, 'createtime': 1571995893, 'updtime': 1571995893} 
+
+INFO [2019-10-25 19:01:23] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 18592 19312 
+ 	 [GoodsAPIView : test]Training complete in 0.017951 real seconds 
+
+ERROR [2019-10-25 19:02:55] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 13020 14416 
+ 	 [GoodsAPIView : test  ] : ['ReturnDict' object has no attribute 'level'];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 23 in test
+serialiers=GoodsCateGoryModelSerializer).run()}
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 87 in run
+self.depthHandler(baseObj)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 40 in depthHandler
+if child.level == self.queryNumber and self.queryNumber<99:
+ 
+
+ERROR [2019-10-25 19:03:11] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 31 error 12468 4696 
+ 	 [GoodsAPIView : test  ] : ['GoodsCateGory' object does not support item assignment];C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 128 in wrapper
+response=self.__run(func,outside_self,request,*args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\core\decorator\response.py line: 84 in __run
+res = func(outside_self, request, *args, **kwargs)
+;C:\Users\Tc\Desktop\Shop\appServer\app\goods\api.py line: 23 in test
+serialiers=GoodsCateGoryModelSerializer).run()}
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 87 in run
+self.depthHandler(baseObj)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 50 in depthHandler
+self.depthHandler(child=itemObj)
+;C:\Users\Tc\Desktop\Shop\appServer\lib\utils\recursion.py line: 39 in depthHandler
+child['child'] = list()
+ 
+
+INFO [2019-10-25 19:06:18] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 10728 18360 
+ 	 返回报文:{'id': 1, 'userid': 1, 'gdcgid': 1, 'gdcgname': '1', 'gdcglastid': 0, 'level': 1, 'createtime': 1571995893, 'updtime': 1571995893, 'child': [{'id': 2, 'userid': 1, 'gdcgid': 2, 'gdcgname': '2', 'gdcglastid': 1, 'level': 2, 'createtime': 1571995893, 'updtime': 1571995893, 'child': []}, {'id': 3, 'userid': 1, 'gdcgid': 3, 'gdcgname': '3', 'gdcglastid': 1, 'level': 2, 'createtime': 1571995893, 'updtime': 1571995893, 'child': []}]} 
+
+INFO [2019-10-25 19:06:18] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 10728 18360 
+ 	 [GoodsAPIView : test]Training complete in 0.026924 real seconds 
+
+INFO [2019-10-25 19:06:36] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 18704 13156 
+ 	 返回报文:{'id': 1, 'userid': 1, 'gdcgid': 1, 'gdcgname': '1', 'gdcglastid': 0, 'level': 1, 'createtime': 1571995893, 'updtime': 1571995893, 'child': [{'id': 2, 'userid': 1, 'gdcgid': 2, 'gdcgname': '2', 'gdcglastid': 1, 'level': 2, 'createtime': 1571995893, 'updtime': 1571995893, 'child': [{'id': 4, 'userid': 1, 'gdcgid': 4, 'gdcgname': '4', 'gdcglastid': 2, 'level': 3, 'createtime': 1571995893, 'updtime': 1571995893, 'child': []}]}, {'id': 3, 'userid': 1, 'gdcgid': 3, 'gdcgname': '3', 'gdcglastid': 1, 'level': 2, 'createtime': 1571995893, 'updtime': 1571995893, 'child': []}]} 
+
+INFO [2019-10-25 19:06:36] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 18704 13156 
+ 	 [GoodsAPIView : test]Training complete in 0.078355 real seconds 
+
+INFO [2019-10-25 21:13:48] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 18704 14376 
+ 	 返回报文:{'id': 1, 'userid': 1, 'gdcgid': 1, 'gdcgname': '1', 'gdcglastid': 0, 'level': 1, 'createtime': 1571995893, 'updtime': 1571995893, 'child': [{'id': 2, 'userid': 1, 'gdcgid': 2, 'gdcgname': '2', 'gdcglastid': 1, 'level': 2, 'createtime': 1571995893, 'updtime': 1571995893, 'child': [{'id': 4, 'userid': 1, 'gdcgid': 4, 'gdcgname': '4', 'gdcglastid': 2, 'level': 3, 'createtime': 1571995893, 'updtime': 1571995893, 'child': []}]}, {'id': 3, 'userid': 1, 'gdcgid': 3, 'gdcgname': '3', 'gdcglastid': 1, 'level': 2, 'createtime': 1571995893, 'updtime': 1571995893, 'child': []}]} 
+
+INFO [2019-10-25 21:13:48] C:\Users\Tc\Desktop\Shop\appServer\lib\utils\log.py 38 info 18704 14376 
+ 	 [GoodsAPIView : test]Training complete in 0.033909 real seconds 
+

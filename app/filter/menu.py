@@ -3,22 +3,13 @@
 menu_top = [
     {
         "label": "首页",
-        "path": "/wel/index",
+        "path": "/dashboard",
         "icon": 'el-icon-document',
         "meta": {
             "i18n": 'dashboard',
         },
         "parentId": 0
-    },
-    {
-        "label": "测试",
-        "path": "/test/index",
-        "icon": 'el-icon-document',
-        "meta": {
-            "i18n": 'test',
-        },
-        "parentId": 1
-    },
+    }
 ]
 
 first = [
@@ -44,6 +35,17 @@ first = [
         ],
     },
     {
+        "label": "素材管理",
+        "path": '/attachment',
+        "component": 'views/wechatHandler/attachment',
+        "meta": {
+            "i18n": 'attachment',
+            "keepAlive": False
+        },
+        "icon": 'icon-caidan',
+        "children": []
+    },
+    {
         "label": "小程序管理",
         "path": '/wechatHandler',
         "meta": {
@@ -51,45 +53,12 @@ first = [
         },
         "icon": 'icon-caidan',
         "children": [
-            # {
-            #     "label": "公告管理",
-            #     "path": 'memoHandler',
-            #     "component": 'views/wechatHandler/memoHandler',
-            #     "meta": {
-            #         "i18n": 'memoHandler',
-            #         "keepAlive": False
-            #     },
-            #     "icon": 'icon-caidan',
-            #     "children": []
-            # },
-            # {
-            #     "label": "联系我们管理",
-            #     "path": 'lianxiwomenHandler',
-            #     "component": 'views/wechatHandler/lianxiwomenHandler',
-            #     "meta": {
-            #         "i18n": 'lianxiwomenHandler',
-            #         "keepAlive": False
-            #     },
-            #     "icon": 'icon-caidan',
-            #     "children": []
-            # },
             {
                 "label": "轮播图",
                 "path": 'bannerHandler',
                 "component": 'views/wechatHandler/bannerHandler',
                 "meta": {
                     "i18n": 'bannerHandler',
-                    "keepAlive": False
-                },
-                "icon": 'icon-caidan',
-                "children": []
-            },
-            {
-                "label": "素材管理",
-                "path": 'attachment',
-                "component": 'views/wechatHandler/attachment',
-                "meta": {
-                    "i18n": 'attachment',
                     "keepAlive": False
                 },
                 "icon": 'icon-caidan',

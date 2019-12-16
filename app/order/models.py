@@ -103,3 +103,35 @@ class Order(models.Model):
         verbose_name = '订单表'
         verbose_name_plural = verbose_name
         db_table = 'order'
+
+
+class Address(models.Model):
+
+    """
+    地址表
+    """
+
+    id = models.BigAutoField(primary_key=True,verbose_name="ID")
+    userid = models.BigIntegerField(verbose_name="用户代码",null=True)
+
+    name = models.CharField(max_length=60,verbose_name="收获人",default='')
+    phone = models.CharField(max_length=60,verbose_name="收获电话",default='')
+    detail = models.CharField(max_length=1024,verbose_name="详细地址",default="")
+    label = models.CharField(max_length=1024,verbose_name="地址",default="")
+    moren = models.CharField(max_length=1,verbose_name="默认,0-是,1-否",default='0')
+
+    createtime = models.BigIntegerField(default=0)
+    updtime = models.BigIntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+
+        t = UtilTime().timestamp
+        if not self.createtime:
+            self.createtime = t
+        self.updtime = t
+        return super(Address, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = '地址表'
+        verbose_name_plural = verbose_name
+        db_table = 'address'

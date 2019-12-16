@@ -8,51 +8,57 @@ from lib.utils.db import RedisTokenHandler
 from lib.utils.string_extension import get_token
 from lib.utils.http_request import send_request_other
 
-from app.user.models import Users,Login
+from app.user.models import Users
+from app.user.serialiers import UsersSerializers
 from app.cache.serialiers import UserModelSerializerToRedis
-from app.cache.utils import RedisCaCheHandler
+
+from app.order.serialiers import AddressModelSerializer
+from app.order.models import Address
 
 from lib.utils.WXBizDataCrypt import WXBizDataCrypt
 
 from app.idGenerator import idGenerator
-from lib.utils.txcloud import txCloud
 
-from app.order.models import ShopCart
-from app.order.serialiers import ShopCartModelSerializer
+from project.config_include.params import WECHAT_SECRET,WECHAT_APPID
 
 class SsoAPIView(viewsets.ViewSet):
-
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True)
     def wechatauth(self, request):
         params = dict(
             js_code=request.data_format.get("js_code"),
-            appid="wx826e7da0c143bda7",
-            secret="8e9e15e030441edc9eeccd934f43b1d4",
+            appid=WECHAT_APPID,
+            secret=WECHAT_SECRET,
             grant_type="authorization_code",
         )
-        res = send_request_other(
+        wechat_res = send_request_other(
             url="https://api.weixin.qq.com/sns/jscode2session",
             params=params)
-        if not res.get("openid"):
+        if not wechat_res.get("openid"):
             raise PubErrorCustom("获取用户错误,腾讯接口有误!")
-        print(res)
-        try:
-            data = UserModelSerializerToRedis(Users.objects.get(uuid=res.get('openid')),many=False).data
-        except Users.DoesNotExist:
-            data={}
 
-        shopcart = ShopCartModelSerializer(ShopCart.objects.filter(userid=data.get("userid", 0)), many=True).data
-        shopnumber = 0
-        for item in shopcart:
-            shopnumber += item['gdnum']
+        data={}
+        token=False
+        address={}
+        try:
+            user=Users.objects.get(uuid=wechat_res.get('openid'))
+            data = UsersSerializers(user,many=False).data
+
+            token = get_token()
+            res = UserModelSerializerToRedis(user, many=False).data
+            RedisTokenHandler(key=token).redis_dict_set(res)
+
+            res = Address.objects.filter(userid=user.userid).order_by('-createtime')
+            address = AddressModelSerializer(res[0], many=False).data if len(res) else {}
+        except Users.DoesNotExist:
+            pass
 
         return {"data":{
-            "user" : data if data else {},
-            "shopcart" :  shopcart,
-            "shopnumber" : shopnumber,
-            "session_key":res.get("session_key")
+            "user" : data,
+            "session_key":wechat_res.get("session_key"),
+            "token":token,
+            "address":address
         }}
 
     @list_route(methods=['POST'])
@@ -60,17 +66,15 @@ class SsoAPIView(viewsets.ViewSet):
     def wechatlogin(self, request):
 
         session_key = request.data_format.get("session_key")
-        appId = 'wx826e7da0c143bda7'
+        appId = WECHAT_APPID
         sessionKey = session_key
         encryptedData = request.data_format.get("encryptedData")
         iv = request.data_format.get("iv")
-
         pc = WXBizDataCrypt(appId, sessionKey)
-
         res = pc.decrypt(encryptedData, iv)
 
         try:
-            obj = UserModelSerializerToRedis(Users.objects.get(uuid=res.get('openId') if 'unionId' not in res else res['unionId']),many=False).data
+            user = Users.objects.get(uuid=res.get('openid'))
         except Users.DoesNotExist:
             user = Users.objects.create(**{
                 "userid": idGenerator.userid('4001'),
@@ -82,25 +86,19 @@ class SsoAPIView(viewsets.ViewSet):
                 "pic": res.get("avatarUrl"),
                 "appid": res.get("watermark")['appid']
             })
-            obj = RedisCaCheHandler(
-                method="save",
-                serialiers="UserModelSerializerToRedis",
-                table="user",
-                filter_value=user,
-                must_key="userid",
-            ).run()
 
-        shopcart = ShopCartModelSerializer(ShopCart.objects.filter(userid=obj.get("userid",0)),many=True).data
-        shopnumber = 0
-        for item in shopcart:
-            shopnumber += item['gdnum']
+        token = get_token()
+        res = UserModelSerializerToRedis(user, many=False).data
+        RedisTokenHandler(key=token).redis_dict_set(res)
+
+        res = Address.objects.filter(userid=user.userid).order_by('-createtime')
+        address = AddressModelSerializer(res[0], many=False).data if len(res) else {}
 
         return {"data":{
-            "user" : obj,
-            "shopcart" :  shopcart,
-            "shopnumber" : shopnumber
+            "user" :UsersSerializers(user, many=False).data,
+            "token":token,
+            "address":address
         }}
-
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True)
@@ -148,11 +146,3 @@ class SsoAPIView(viewsets.ViewSet):
         redis_cli.redis_dict_set(res)
 
         return { "data": token}
-
-
-    #获取腾讯云临时凭证
-    @list_route(methods=['GET'])
-    @Core_connector(isPasswd=True,isTicket=True)
-    def getAuthorization(self,request, *args, **kwargs):
-
-        return { "data": txCloud().run()}

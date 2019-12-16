@@ -86,11 +86,18 @@ class PublicAPIView(viewsets.ViewSet):
     @Core_connector(isTransaction=True, isPasswd=True)
     def setAttachMent(self, request):
 
+        before_groupid = ""
         if request.data_format.get("id"):
             obj = AttachMent.objects.get(id= request.data_format.get("id"))
+            before_groupid = obj.grouid
+
             obj.title = request.data_format.get("title")
             obj.grouid =  request.data_format.get("grouid")
             obj.save()
+
+            obj2 = AttachMentGroup.objects.select_for_update().get(id=before_groupid)
+            obj2.number -= 1
+            obj2.save()
         else:
             obj = AttachMent.objects.create(**dict(
                 url = request.data_format.get("url"),
@@ -99,9 +106,9 @@ class PublicAPIView(viewsets.ViewSet):
                 type = request.data_format.get("type")
             ))
 
-            obj1 = AttachMentGroup.objects.select_for_update().get(id= obj.grouid)
-            obj1.number +=1
-            obj1.save()
+        obj1 = AttachMentGroup.objects.select_for_update().get(id= obj.grouid)
+        obj1.number +=1
+        obj1.save()
 
         RedisCaCheHandler(
             method="save",
@@ -110,6 +117,15 @@ class PublicAPIView(viewsets.ViewSet):
             filter_value=obj1,
             must_key="id",
         ).run()
+
+        if before_groupid:
+            RedisCaCheHandler(
+                method="save",
+                serialiers="AttachMentGroupModelSerializerToRedis",
+                table="AttachMentGroup",
+                filter_value=obj2,
+                must_key="id",
+            ).run()
 
         RedisCaCheHandler(
             method="save",

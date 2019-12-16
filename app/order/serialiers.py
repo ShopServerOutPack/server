@@ -1,7 +1,22 @@
 
 import json
 from rest_framework import serializers
-from app.order.models import ShopCart,OrderGoodsLink,Order
+from app.order.models import ShopCart,OrderGoodsLink,Order,Address
+
+class AddressModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Address
+        fields = '__all__'
+
+class AddressSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    userid = serializers.IntegerField()
+    name = serializers.CharField()
+    phone = serializers.CharField()
+    detail = serializers.CharField()
+    label = serializers.CharField()
+    moren = serializers.CharField()
 
 class ShopCartModelSerializer(serializers.ModelSerializer):
 

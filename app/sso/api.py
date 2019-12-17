@@ -80,6 +80,7 @@ class SsoAPIView(viewsets.ViewSet):
                 "userid": idGenerator.userid('4001'),
                 "uuid": res.get('openId') if 'unionId' not in res else res['unionId'],
                 "rolecode": '4001',
+                "mobile":res.get('openId') if 'unionId' not in res else res['unionId'],
                 "name": res.get("nickName"),
                 "sex": res.get("sex"),
                 "addr": "{}-{}-{}".format(res.get("country"), res.get("city"), res.get("province")),

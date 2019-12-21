@@ -20,3 +20,4 @@ cryptokit
 cos-python-sdk-v5
 tencentcloud-sdk-python
 qcloud-python-sts
+xmltodict

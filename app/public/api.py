@@ -86,6 +86,9 @@ class PublicAPIView(viewsets.ViewSet):
     @Core_connector(isTransaction=True, isPasswd=True)
     def setAttachMent(self, request):
 
+        if not request.data_format.get("grouid"):
+            raise PubErrorCustom("请先添加分组!")
+
         before_groupid = ""
         if request.data_format.get("id"):
             obj = AttachMent.objects.get(id= request.data_format.get("id"))

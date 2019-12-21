@@ -5,7 +5,7 @@ from lib.utils.mytime import UtilTime
 from lib.utils.exceptions import PubErrorCustom
 from app.user.models import Users,Role
 from app.public.models import Banner,AttachMentGroup,AttachMent,OtherMemo
-from app.goods.models import GoodsCateGory,Goods
+from app.goods.models import GoodsCateGory,Goods,GoodsTheme,Card
 
 class UserModelSerializerToRedis(serializers.ModelSerializer):
 
@@ -53,19 +53,10 @@ class BannerModelSerializerToRedis(serializers.ModelSerializer):
 class GoodsCateGoryModelSerializerToRedis(serializers.ModelSerializer):
 
     createtime_format = serializers.SerializerMethodField()
+    status_format = serializers.SerializerMethodField()
 
-    isstart_format = serializers.SerializerMethodField()
-    istheme_format = serializers.SerializerMethodField()
-    islie_format = serializers.SerializerMethodField()
-    
-    def get_islie_format(self,obj):
-        return '是' if obj.islie == '0' else '否'
-
-    def get_isstart_format(self,obj):
-        return '是' if obj.isstart == '0' else '否'
-
-    def get_istheme_format(self,obj):
-        return '是' if obj.istheme == '0' else '否'
+    def get_status_format(self,obj):
+        return '是' if obj.status == '0' else '否'
 
     def get_createtime_format(self,obj):
         return UtilTime().timestamp_to_string(obj.createtime)
@@ -74,11 +65,25 @@ class GoodsCateGoryModelSerializerToRedis(serializers.ModelSerializer):
         model = GoodsCateGory
         fields = '__all__'
 
+class GoodsThemeModelSerializerToRedis(serializers.ModelSerializer):
+
+    createtime_format = serializers.SerializerMethodField()
+    status_format = serializers.SerializerMethodField()
+
+    def get_status_format(self,obj):
+        return '是' if obj.status == '0' else '否'
+
+    def get_createtime_format(self,obj):
+        return UtilTime().timestamp_to_string(obj.createtime)
+
+    class Meta:
+        model = GoodsTheme
+        fields = '__all__'
+
 
 class GoodsModelSerializerToRedis(serializers.ModelSerializer):
 
     createtime_format = serializers.SerializerMethodField()
-    isnew_format = serializers.SerializerMethodField()
 
     gdprice = serializers.DecimalField(max_digits=16,decimal_places=2)
 
@@ -90,12 +95,28 @@ class GoodsModelSerializerToRedis(serializers.ModelSerializer):
     def get_createtime_format(self,obj):
         return UtilTime().timestamp_to_string(obj.createtime)
 
-    def get_isnew_format(self,obj):
-        return '是' if obj.isnew == '0' else '否'
-
     class Meta:
         model = Goods
         fields = '__all__'
+
+
+class CardModelSerializerToRedis(serializers.ModelSerializer):
+
+    createtime_format = serializers.SerializerMethodField()
+
+    # username = serializers.SerializerMethodField()
+    bal = serializers.DecimalField(max_digits=18,decimal_places=2)
+
+    # def get_username(self,obj):
+    #     return Users.objects.get(userid=obj.useuserid).name if obj.useuserid>0 else ""
+
+    def get_createtime_format(self,obj):
+        return UtilTime().timestamp_to_string(obj.createtime)
+
+    class Meta:
+        model = Card
+        fields = '__all__'
+
 
 class AttachMentGroupModelSerializerToRedis(serializers.ModelSerializer):
 

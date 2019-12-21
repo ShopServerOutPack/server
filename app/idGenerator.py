@@ -1,5 +1,6 @@
 
-from lib.utils.db import RedisIdGeneratorForOrder,RedisIdGeneratorForUser,RedisIdGeneratorForGoods,RedisIdGeneratorForGoodsCategory
+from lib.utils.db import RedisIdGeneratorForOrder,RedisIdGeneratorForUser,\
+    RedisIdGeneratorForGoods,RedisIdGeneratorForGoodsCategory,RedisIdGeneratorForGoodsThemeCategory,RedisIdGeneratorForCard
 
 class idGenerator(object):
 
@@ -17,6 +18,14 @@ class idGenerator(object):
     @staticmethod
     def goodscategory():
         return RedisIdGeneratorForGoodsCategory().run()
+
+    @staticmethod
+    def goodsthemecategory():
+        return RedisIdGeneratorForGoodsThemeCategory().run()
+
+    @staticmethod
+    def getcardid():
+        return RedisIdGeneratorForCard().run()
 
     @staticmethod
     def goods():

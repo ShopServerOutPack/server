@@ -2,9 +2,22 @@
 import json
 from rest_framework import serializers
 from app.user.models import Users
+from lib.utils.mytime import UtilTime
 
 class UsersSerializers(serializers.Serializer):
 
     userid = serializers.IntegerField()
     pic = serializers.CharField()
     name = serializers.CharField()
+
+class UsersModelSerializer(serializers.ModelSerializer):
+
+    createtime_format = serializers.SerializerMethodField()
+    bal = serializers.DecimalField(max_digits=16, decimal_places=2)
+
+    def get_createtime_format(self,obj):
+        return UtilTime().timestamp_to_string(obj.createtime)
+
+    class Meta:
+        model = Users
+        fields = '__all__'

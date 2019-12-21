@@ -1,4 +1,5 @@
 
+import json
 from rest_framework import viewsets
 from rest_framework.decorators import list_route
 
@@ -8,8 +9,8 @@ from lib.utils.exceptions import PubErrorCustom
 
 from app.cache.utils import RedisCaCheHandler
 
-from app.goods.models import GoodsCateGory,Goods
-from app.goods.serialiers import GoodsCateGoryModelSerializer,GoodsModelSerializer
+from app.goods.models import GoodsCateGory,Goods,GoodsTheme,Card
+from app.goods.serialiers import GoodsCateGoryModelSerializer,GoodsModelSerializer,GoodsThemeModelSerializer,CardModelSerializer
 
 class GoodsAPIView(viewsets.ViewSet):
 
@@ -73,7 +74,17 @@ class GoodsAPIView(viewsets.ViewSet):
             table="goodscategory",
             filter_value=request.query_params_format
         ).run()
-
+        for item in obj:
+            goods=[]
+            for gdid in json.loads(item['goods'])['goods']:
+                goods.append(RedisCaCheHandler(
+                    method="get",
+                    serialiers="GoodsModelSerializerToRedis",
+                    table="goods",
+                    must_key_value=gdid
+                ).run())
+            item['goods'] = goods
+        print(obj)
         return {"data":obj}
 
     @list_route(methods=['POST'])
@@ -141,5 +152,130 @@ class GoodsAPIView(viewsets.ViewSet):
             method="delete",
             table="goods",
             must_key_value=request.data_format.get('gdid')).run()
+
+        return None
+
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True,
+                    isPasswd=True,
+                    isTicket=True,
+                    serializer_class=GoodsThemeModelSerializer,
+                    model_class=GoodsTheme)
+    def saveGoodsTheme(self, request, *args, **kwargs):
+
+        serializer = kwargs.pop("serializer")
+        obj = serializer.save()
+        obj.userid = request.user.get('userid')
+        obj.save()
+
+        RedisCaCheHandler(
+            method="save",
+            serialiers="GoodsThemeModelSerializerToRedis",
+            table="goodstheme",
+            filter_value=obj,
+            must_key="typeid",
+        ).run()
+
+        return None
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True, isTicket=True, isPagination=True)
+    def getGoodsTheme(self, request, *args, **kwargs):
+
+        obj = RedisCaCheHandler(
+            method="filter",
+            serialiers="GoodsThemeModelSerializerToRedis",
+            table="goodstheme",
+            filter_value=request.query_params_format
+        ).run()
+        for item in obj:
+            goods = []
+            for gdid in json.loads(item['goods'])['goods']:
+                goods.append(RedisCaCheHandler(
+                    method="get",
+                    serialiers="GoodsModelSerializerToRedis",
+                    table="goods",
+                    must_key_value=gdid
+                ).run())
+            item['goods'] = goods
+        print(obj)
+        return {"data": obj}
+
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True, isTicket=True, isPasswd=True)
+    def delGoodsTheme(self, request, *args, **kwargs):
+
+        GoodsTheme.objects.filter(typeid=request.data_format.get('typeid')).delete()
+
+        RedisCaCheHandler(
+            method="delete",
+            table="goodstheme",
+            must_key_value=request.data_format.get('typeid')).run()
+
+        return None
+
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True,
+                    isPasswd=True,
+                    isTicket=True)
+    def saveCard(self, request, *args, **kwargs):
+
+        cards = []
+        print(request.data_format)
+        for item in range(int(request.data_format.get("number"))):
+            cards.append(Card.objects.create(**{
+                "userid" : request.user['userid'],
+                "type": request.data_format.get("type"),
+                "bal" : request.data_format.get("bal"),
+            }))
+
+        for item in cards:
+            RedisCaCheHandler(
+                method="save",
+                serialiers="CardModelSerializerToRedis",
+                table="card",
+                filter_value=item,
+                must_key="id",
+            ).run()
+
+        return None
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True, isTicket=True, isPagination=True)
+    def getCard(self, request, *args, **kwargs):
+
+        obj = RedisCaCheHandler(
+            method="filter",
+            serialiers="CardModelSerializerToRedis",
+            table="card",
+            filter_value=request.query_params_format
+        ).run()
+        return {"data": obj}
+
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True, isTicket=True, isPasswd=True)
+    def delCard(self, request, *args, **kwargs):
+
+        Card.objects.filter(id=request.data_format.get('id')).delete()
+
+        RedisCaCheHandler(
+            method="delete",
+            table="card",
+            must_key_value=request.data_format.get('id')).run()
+
+        return None
+
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True, isTicket=True, isPasswd=True)
+    def delBatchCard(self, request, *args, **kwargs):
+
+        cards = Card.objects.filter(id__in=request.data_format.get('ids'))
+        cards.delete()
+
+        for item in request.data_format.get('ids'):
+            RedisCaCheHandler(
+                method="delete",
+                table="card",
+                must_key_value=item).run()
 
         return None

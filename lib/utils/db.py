@@ -31,6 +31,19 @@ class RedisIdGenerator(RedisHandler):
     def run(self):
         raise PubErrorCustom("Not is func!")
 
+
+class RedisIdGeneratorForCard(RedisIdGenerator):
+    """
+    获取充值卡卡号
+    """
+    def __init__(self,**kwargs):
+        kwargs.setdefault('key', 'czCard')
+        super().__init__(**kwargs)
+
+    def run(self):
+        return "%s%05d"%("CZ",self.redis_client.incr(self.key))
+
+
 class RedisIdGeneratorForUser(RedisIdGenerator):
     """
     获取用户ID,通过传入角色ID获取值
@@ -66,6 +79,17 @@ class RedisIdGeneratorForGoodsCategory(RedisIdGenerator):
 
     def run(self):
         return "%s%03d"%("GC",self.redis_client.incr(self.key))
+
+class RedisIdGeneratorForGoodsThemeCategory(RedisIdGenerator):
+    """
+    获取商品分类ID
+    """
+    def __init__(self,**kwargs):
+        kwargs.setdefault('key', 'goodscategoryById')
+        super().__init__(**kwargs)
+
+    def run(self):
+        return "%s%03d"%("TM",self.redis_client.incr(self.key))
 
 class RedisIdGeneratorForGoods(RedisIdGenerator):
     """

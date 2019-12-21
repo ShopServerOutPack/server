@@ -24,10 +24,9 @@ class ShopCart(models.Model):
 
     def save(self, *args, **kwargs):
 
-        t = UtilTime().timestamp
         if not self.createtime:
-            self.createtime = t
-        self.updtime = t
+            self.createtime = UtilTime().timestamp
+        self.updtime = UtilTime().timestamp
         return super(ShopCart, self).save(*args, **kwargs)
 
     class Meta:
@@ -55,10 +54,9 @@ class OrderGoodsLink(models.Model):
 
     def save(self, *args, **kwargs):
 
-        t = UtilTime().timestamp
         if not self.createtime:
-            self.createtime = t
-        self.updtime = t
+            self.createtime = UtilTime().timestamp
+        self.updtime = UtilTime().timestamp
         return super(OrderGoodsLink, self).save(*args, **kwargs)
 
     class Meta:
@@ -81,9 +79,13 @@ class Order(models.Model):
     userid = models.BigIntegerField(verbose_name="用户代码", null=True)
 
     amount = models.DecimalField(verbose_name="交易金额",max_digits=18,decimal_places=6,default=0.0)
-    payamount = models.DecimalField(verbose_name="实际支付金额",max_digits=18,decimal_places=6,default=0.0)
+    payamount = models.DecimalField(verbose_name="微信支付金额",max_digits=18,decimal_places=6,default=0.0)
+    balamount = models.DecimalField(verbose_name="余额支付金额",max_digits=18,decimal_places=6,default=0.0)
 
     status = models.CharField(max_length=1,verbose_name="状态,0-待付款,1-已付款",default="0")
+    fhstatus = models.CharField(max_length=1,verbose_name="0-已发货,1-未发货",default="1")
+    paymsg = models.TextField(default="")
+    address = models.TextField(default="{}")
 
     createtime = models.BigIntegerField(default=0)
     updtime = models.BigIntegerField(default=0)
@@ -93,10 +95,10 @@ class Order(models.Model):
         if not self.orderid:
             self.orderid = idGenerator.ordercode()
 
-        t = UtilTime().timestamp
+
         if not self.createtime:
-            self.createtime = t
-        self.updtime = t
+            self.createtime = UtilTime().timestamp
+        self.updtime = UtilTime().timestamp
         return super(Order, self).save(*args, **kwargs)
 
     class Meta:
@@ -125,10 +127,9 @@ class Address(models.Model):
 
     def save(self, *args, **kwargs):
 
-        t = UtilTime().timestamp
         if not self.createtime:
-            self.createtime = t
-        self.updtime = t
+            self.createtime = UtilTime().timestamp
+        self.updtime = UtilTime().timestamp
         return super(Address, self).save(*args, **kwargs)
 
     class Meta:

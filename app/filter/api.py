@@ -1,6 +1,7 @@
 
 from rest_framework import viewsets
 from rest_framework.decorators import list_route
+import json
 
 from lib.utils.exceptions import PubErrorCustom
 from lib.core.decorator.response import Core_connector
@@ -19,48 +20,194 @@ class FilterAPIView(viewsets.ViewSet):
 
         rdata={
             "banners":[],
-            "category_theme_one":[],  #一列
-            "category_theme_two": [], #二列
+            "category_hot":[],
+            "category_tj": [],
             "newgoods":[]
         }
 
         #轮播图数据
-        rdata['banners'] = RedisCaCheHandler(
+        rdata['banners'] = [ dict(
+            id = item['id'],
+            url = item['url']
+        ) for item in RedisCaCheHandler(
             method="filter",
             serialiers="BannerModelSerializerToRedis",
             table="banner",
             filter_value={}
-        ).run()
+        ).run() ]
 
-        #主题分类数据(一列)
-        rdata['category_theme_one'] = RedisCaCheHandler(
+        #主题分类数据(热门)
+        rdata['category_hot'] = [  dict(
+            typeid = item['typeid'],
+            name = item['name'],
+            sort = item['sort'],
+            url  = item['url']
+        ) for item in RedisCaCheHandler(
             method="filter",
-            serialiers="GoodsCateGoryModelSerializerToRedis",
-            table="goodscategory",
-            filter_value={"isstart":"0","istheme":"0","islie":"1"}
-        ).run()
+            serialiers="GoodsThemeModelSerializerToRedis",
+            table="goodstheme",
+            filter_value={"status":"0","type":"0"}
+        ).run() ]
+        rdata['category_hot'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
-        rdata['category_theme_one'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
-        #主题分类数据(二列)
-        rdata['category_theme_two'] = RedisCaCheHandler(
+        #主题分类数据(推荐)
+        rdata['category_tj'] = [  dict(
+            typeid = item['typeid'],
+            name = item['name'],
+            sort = item['sort'],
+            url  = item['url']
+        ) for item in RedisCaCheHandler(
             method="filter",
-            serialiers="GoodsCateGoryModelSerializerToRedis",
-            table="goodscategory",
-            filter_value={"isstart":"0","istheme":"0","islie":"0"}
-        ).run()
-
-        rdata['category_theme_two'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
+            serialiers="GoodsThemeModelSerializerToRedis",
+            table="goodstheme",
+            filter_value={"status":"0","type":"1"}
+        ).run() ]
+        rdata['category_tj'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
         #新品数据
-        rdata['newgoods'] =RedisCaCheHandler(
+        rdata['newgoods'] = [ dict(
+            gdid = item['gdid'],
+            gdname = item['gdname'],
+            gdimg = item['gdimg'],
+            gdprice = item['gdprice'],
+            sort = item['sort']
+        ) for item in RedisCaCheHandler(
             method="filter",
             serialiers="GoodsModelSerializerToRedis",
             table="goods",
-                filter_value={"isnew":"0","gdstatus":"0"}
+                filter_value={"gdstatus":"0"}
+        ).run() ]
+        if len(rdata['newgoods']) >=6 :
+            rdata['newgoods'] = rdata['newgoods'][:6]
+        else:
+            rdata['newgoods'] = rdata['newgoods'][:len(rdata['newgoods'])]
+        rdata['newgoods'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
+
+        print(rdata)
+        return {"data": rdata}
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True)
+    def getGoods(self,request):
+        print(request.query_params_format.get('gdid'))
+        res = RedisCaCheHandler(
+            method="get",
+            serialiers="GoodsModelSerializerToRedis",
+            table="goods",
+            must_key_value=request.query_params_format.get('gdid')
+        ).run()
+        if res['gdstatus'] == '0':
+            return {
+                "data":dict(
+                    gdid = res['gdid'],
+                    gdimg = res['gdimg'],
+                    gdnum = res['gdnum'],
+                    gdname = res['gdname'],
+                    gdprice = res['gdprice'],
+                    detail = res['detail'],
+                    product = res['product'],
+                    shbz = res['shbz']
+                )
+            }
+        else:
+            return {"data":False}
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True)
+    def getGoodsForTheme(self,request):
+
+
+        obj = RedisCaCheHandler(
+            method="get",
+            serialiers="GoodsThemeModelSerializerToRedis",
+            table="goodstheme",
+            must_key_value=request.query_params_format.get('typeid')
+        ).run()
+        print(obj)
+        if obj['status']=='0':
+            goods = []
+            for gdid in json.loads(obj['goods'])['goods']:
+                res = RedisCaCheHandler(
+                    method="get",
+                    serialiers="GoodsModelSerializerToRedis",
+                    table="goods",
+                    must_key_value=gdid
+                ).run()
+                print(res)
+                if res['gdstatus'] == '0':
+                    goods.append(dict(
+                        gdid=res['gdid'],
+                        gdimg=res['gdimg'],
+                        gdname=res['gdname'],
+                        gdprice=res['gdprice'],
+                        sort = res['sort']
+                    ))
+            goods.sort(key=lambda k: (k.get('sort', 0)), reverse=False)
+            print(goods)
+            return {"data":goods}
+        else:
+            return {"data":False}
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True)
+    def getGoodsForCategory(self,request):
+
+
+        obj = RedisCaCheHandler(
+            method="get",
+            serialiers="GoodsCateGoryModelSerializerToRedis",
+            table="goodscategory",
+            must_key_value=request.query_params_format.get('gdcgid')
         ).run()
 
-        return {"data": rdata}
+        if obj['status']=='0':
+            goods = []
+            for gdid in json.loads(obj['goods'])['goods']:
+                res = RedisCaCheHandler(
+                    method="get",
+                    serialiers="GoodsModelSerializerToRedis",
+                    table="goods",
+                    must_key_value=gdid
+                ).run()
+                if res['gdstatus'] == '0':
+                    goods.append(dict(
+                        gdid=res['gdid'],
+                        gdimg=res['gdimg'],
+                        gdname=res['gdname'],
+                        sort = res['sort']
+                    ))
+            goods.sort(key=lambda k: (k.get('sort', 0)), reverse=False)
+            return {"data":goods}
+        else:
+            return {"data":False}
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True)
+    def getGoodsCategory(self,request,*args, **kwargs):
+
+        """
+        获取商品分类数据
+        :param request:
+        :return:
+        """
+
+        obj = [ dict(
+            gdcgid = item['gdcgid'],
+            gdcgname = item['gdcgname'],
+            url = item['url'],
+            sort = item['sort']
+        ) for item in RedisCaCheHandler(
+            method="filter",
+            serialiers="GoodsCateGoryModelSerializerToRedis",
+            table="goodscategory",
+            filter_value={"status":"0"}
+        ).run() ]
+
+        obj.sort(key=lambda k: (k.get('sort', 0)), reverse=False)
+        print(obj)
+        return {"data":obj}
+
 
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True,isTicket=True)
@@ -87,26 +234,7 @@ class FilterAPIView(viewsets.ViewSet):
         return {"data":data}
 
 
-    @list_route(methods=['GET'])
-    @Core_connector(isPasswd=True)
-    def getGoodsCategory(self,request,*args, **kwargs):
 
-        """
-        获取商品分类数据
-        :param request:
-        :return:
-        """
-
-        obj =RedisCaCheHandler(
-            method="filter",
-            serialiers="GoodsCateGoryModelSerializerToRedis",
-            table="goodscategory",
-            filter_value=request.query_params_format
-        ).run()
-
-        obj.sort(key=lambda k: (k.get('sort', 0)), reverse=False)
-
-        return {"data":obj}
 
 
     @list_route(methods=['GET'])
@@ -117,13 +245,15 @@ class FilterAPIView(viewsets.ViewSet):
         :param request:
         :return:
         """
-        obj =RedisCaCheHandler(
-            method="filter",
-            serialiers="GoodsModelSerializerToRedis",
-            table="goods",
-            filter_value=request.query_params_format
-        ).run()
-        return {"data":obj}
+        objs=[]
+        for item in request.query_params_format['goods']:
+            objs.append(RedisCaCheHandler(
+                method="get",
+                serialiers="GoodsModelSerializerToRedis",
+                table="goods",
+                must_key_value=item
+            ).run())
+        return {"data":objs.sort(key=lambda k: (k.get('sort', 0)), reverse=False)}
 
 
     @list_route(methods=['GET'])

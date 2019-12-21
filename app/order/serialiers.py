@@ -2,6 +2,7 @@
 import json
 from rest_framework import serializers
 from app.order.models import ShopCart,OrderGoodsLink,Order,Address
+from lib.utils.mytime import UtilTime
 
 class AddressModelSerializer(serializers.ModelSerializer):
 
@@ -46,14 +47,30 @@ class OrderModelSerializer(serializers.ModelSerializer):
 
     amount = serializers.DecimalField(max_digits=16,decimal_places=2)
     payamount = serializers.DecimalField(max_digits=16,decimal_places=2)
+    balamount = serializers.DecimalField(max_digits=16,decimal_places=2)
+
+    createtime_format = serializers.SerializerMethodField()
+
+    fhstatus_format = serializers.SerializerMethodField()
+
+    address = serializers.SerializerMethodField()
+
+    def get_createtime_format(self,obj):
+        return UtilTime().timestamp_to_string(obj.createtime)
 
     def get_linkid(self,obj):
 
         return OrderGoodsLinkModelSerializer(OrderGoodsLink.objects. \
                    filter(linkid__in=json.loads(obj.linkid)['linkids']).order_by("-updtime"), many=True).data
 
+    def get_address(self,obj):
+        return json.loads(obj.address)
+
     def get_status_format(self,obj):
         return "已付款" if obj.status=='1' else '待付款'
+
+    def get_fhstatus_format(self,obj):
+        return "已发货" if obj.fhstatus=='0' else '待发货'
 
 
     class Meta:

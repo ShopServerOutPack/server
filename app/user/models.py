@@ -36,7 +36,7 @@ class Users(models.Model):
 
     appid = models.CharField(max_length=60, verbose_name="用户小程序应用ID", default='', null=True)
     uuid =  models.CharField(max_length=60, verbose_name="用户小程序ID/用户账号", default='', null=True)
-    mobile = models.CharField(max_length=11, verbose_name="手机号", default='', null=True)
+    mobile = models.CharField(max_length=60, verbose_name="手机号", default='', null=True)
 
     pic=models.CharField(max_length=255,verbose_name="头像地址",default='')
 
@@ -49,11 +49,10 @@ class Users(models.Model):
     updtime = models.BigIntegerField(default=0)
 
     def save(self, *args, **kwargs):
-        t = UtilTime().timestamp
 
-        self.updtime = t
         if not self.createtime:
-            self.createtime = t
+            self.createtime = UtilTime().timestamp
+
         if not self.passwd:
             self.passwd = md5pass('123456')
         if not self.pay_passwd:

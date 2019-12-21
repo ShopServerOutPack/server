@@ -1,4 +1,5 @@
 
+import time
 
 class UtilTime(object):
 
@@ -44,8 +45,10 @@ class UtilTime(object):
             string_s, format_v, tzinfo=self.timezone) if string_s else string_s
 
     #时间戳转字符串
-    def timestamp_to_string(self, timestamp,format_v="YYYY-MM-DD HH:mm:ss"):
-        return self.arrow_to_string(self.timestamp_to_arrow(timestamp),format_v)
+    def timestamp_to_string(self, timestamp,format_v="%Y-%m-%d %H:%M:%S"):
+
+        time_local = time.localtime(int(timestamp))
+        return time.strftime(format_v, time_local)
 
     #时间戳转arrow
     def timestamp_to_arrow(self, timestamp):
@@ -110,8 +113,17 @@ class UtilTime(object):
             return None
 
 
+def send_toTimestamp(t):
+    t1=str(t)
+    t2=time.strptime(t1[0:19],"%Y-%m-%d %H:%M:%S")
+    return time.mktime(t2)
+
 if __name__ == '__main__':
 
-    times = UtilTime()
-    print(times.timestamp_to_arrow(1557943184))
+    print(UtilTime().timestamp)
+    print(UtilTime().timestamp_to_string(1576920448))
+    # print(UtilTime().timestamp_to_arrow(1576920448))
+    #
+    # import arrow
+    # print(arrow.get(1576920448))
 

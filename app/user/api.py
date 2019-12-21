@@ -5,6 +5,8 @@ from rest_framework.decorators import list_route
 from lib.core.decorator.response import Core_connector
 
 from app.cache.utils import RedisCaCheHandler
+from app.user.serialiers import UsersModelSerializer
+from app.user.models import Users
 
 class UserAPIView(viewsets.ViewSet):
 
@@ -25,15 +27,8 @@ class UserAPIView(viewsets.ViewSet):
         }}
 
     @list_route(methods=['GET'])
-    @Core_connector(isTicket=True,isPasswd=True)
+    @Core_connector(isTicket=True,isPasswd=True,isPagination=True)
     def getUser(self, request):
+        query = Users.objects.filter(rolecode=request.query_params_format.get("rolecode"))
 
-        data = RedisCaCheHandler(
-            method="filter",
-            serialiers="UserModelSerializerToRedis",
-            table="user",
-            filter_value=request.query_params_format,
-            must_params=['rolecode']
-        ).run()
-        print(data)
-        return {"data": data}
+        return {"data": UsersModelSerializer(query,many=True).data}

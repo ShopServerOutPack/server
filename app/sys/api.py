@@ -4,13 +4,12 @@ from lib.core.decorator.response import Core_connector
 from lib.utils.exceptions import PubErrorCustom
 
 from app.user.models import Users
-from app.goods.models import GoodsCateGory,Goods
+from app.goods.models import GoodsCateGory,Goods,Card,GoodsTheme
 from app.public.models import Banner,AttachMentGroup,AttachMent
 
 
 from app.cache.utils import RedisCaCheHandler
 
-from lib.utils.db import RedisCaCheHandlerCitySheng,RedisCaCheHandlerCityShi,RedisCaCheHandlerCityXian
 from include.city import city
 
 class SsyAPIView(viewsets.ViewSet):
@@ -20,27 +19,27 @@ class SsyAPIView(viewsets.ViewSet):
     @Core_connector()
     def refeshUserRedis(self,request, *args, **kwargs):
 
-        ShengRes = RedisCaCheHandlerCitySheng()
-        Shengs=[]
-        for item in city:
-
-            Shengs.append({
-                "label":item['label'],
-                "value":item['value']
-            })
-
-            r = RedisCaCheHandlerCityShi()
-            childs=[ {"label":childs_item['label'],"value":childs_item['value']} for childs_item in item['children'] ]
-            r.redis_dict_set(item['value'],{"value":childs})
-            r = RedisCaCheHandlerCityXian()
-            if "children" in item:
-                for CityShiItem in item['children']:
-                    if 'children' in CityShiItem:
-                        childs = [{"label": childs_item['label'], "value": childs_item['value']} for childs_item in CityShiItem['children']]
-                    else:
-                        childs=[]
-                    r.redis_dict_set(CityShiItem['value'], {"value":childs})
-        ShengRes.redis_set({"value":Shengs})
+        # ShengRes = RedisCaCheHandlerCitySheng()
+        # Shengs=[]
+        # for item in city:
+        #
+        #     Shengs.append({
+        #         "label":item['label'],
+        #         "value":item['value']
+        #     })
+        #
+        #     r = RedisCaCheHandlerCityShi()
+        #     childs=[ {"label":childs_item['label'],"value":childs_item['value']} for childs_item in item['children'] ]
+        #     r.redis_dict_set(item['value'],{"value":childs})
+        #     r = RedisCaCheHandlerCityXian()
+        #     if "children" in item:
+        #         for CityShiItem in item['children']:
+        #             if 'children' in CityShiItem:
+        #                 childs = [{"label": childs_item['label'], "value": childs_item['value']} for childs_item in CityShiItem['children']]
+        #             else:
+        #                 childs=[]
+        #             r.redis_dict_set(CityShiItem['value'], {"value":childs})
+        # ShengRes.redis_set({"value":Shengs})
 
         RedisCaCheHandler(
             method="saveAll",
@@ -80,6 +79,22 @@ class SsyAPIView(viewsets.ViewSet):
             table="AttachMent",
             filter_value=AttachMent.objects.filter(),
             must_key="id",
+        ).run()
+
+        RedisCaCheHandler(
+            method="saveAll",
+            serialiers="CardModelSerializerToRedis",
+            table="card",
+            filter_value=Card.objects.filter(),
+            must_key="id",
+        ).run()
+
+        RedisCaCheHandler(
+            method="saveAll",
+            serialiers="GoodsThemeModelSerializerToRedis",
+            table="goodstheme",
+            filter_value=GoodsTheme.objects.filter(),
+            must_key="typeid",
         ).run()
 
         return None

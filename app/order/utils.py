@@ -138,11 +138,11 @@ class wechatPay(object):
         xmlmsg = xmltodict.parse(res.content.decode('utf-8'))
 
         if xmlmsg['xml']['return_code'] == 'SUCCESS':
-            sign = self.hashdata(xmlmsg['xml'], WECHAT_PAY_KEY)
-            print(sign)
-            print(xmlmsg['xml'])
-            if sign != xmlmsg['xml']['sign']:
-                raise PubErrorCustom("非法操作！")
+            # sign = self.hashdata(xmlmsg['xml'], WECHAT_PAY_KEY)
+            # print(sign)
+            # print(xmlmsg['xml'])
+            # if sign != xmlmsg['xml']['sign']:
+            #     raise PubErrorCustom("非法操作！")
 
             if xmlmsg['xml']['result_code'] == 'SUCCESS':
                 order = Order.objects.select_for_update().get(orderid=orderid)

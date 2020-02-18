@@ -84,3 +84,26 @@ class Role(models.Model):
         verbose_name = '角色表'
         verbose_name_plural = verbose_name
         db_table = 'role'
+
+
+class BalList(models.Model):
+
+    id = models.BigAutoField(primary_key=True)
+    userid =  models.BigIntegerField(default=0,verbose_name="用户ID")
+    amount = models.DecimalField(max_digits=18,decimal_places=6,default=0.000,verbose_name="交易金额")
+    bal = models.DecimalField(max_digits=18, decimal_places=6, default=0.000, verbose_name="交易前金额")
+    confirm_bal = models.DecimalField(max_digits=18, decimal_places=6, default=0.000, verbose_name="交易后金额")
+    memo = models.CharField(max_length=255,verbose_name="交易摘要")
+    orderid = models.CharField(max_length=120,default='0',verbose_name="订单号")
+
+    createtime = models.BigIntegerField()
+
+    def save(self, *args, **kwargs):
+        if not self.createtime:
+            self.createtime = UtilTime().timestamp
+        return super(BalList, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = '动账明细表'
+        verbose_name_plural = verbose_name
+        db_table = 'ballist'

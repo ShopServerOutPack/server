@@ -113,7 +113,7 @@ first = [
         "children": []
     },
     {
-        "label": "虚拟卡管理",
+        "label": "虚拟商品卡密管理",
         "path": '/yhcard',
         "component": 'views/wechatHandler/yhcard',
         "meta": {
@@ -174,38 +174,6 @@ first = [
         },
         "icon": 'el-icon-setting',
         "children": [
-            {
-                "label": "系统参数",
-                "path": 'SysParams',
-                "meta": {
-                    "i18n": 'SysParams'
-                },
-                "icon": 'el-icon-setting',
-                "children": [
-                    # {
-                    #     "label": "支付方式",
-                    #     "path": 'Paytype',
-                    #     "component": 'views/systemManagement/Paytype',
-                    #     "meta": {
-                    #         "i18n": 'Paytype',
-                    #         "keepAlive": True
-                    #     },
-                    #     "icon": 'icon-caidan',
-                    #     "children": []
-                    # },
-                    # {
-                    #     "label": "支付渠道",
-                    #     "path": 'Paypass',
-                    #     "component": 'views/systemManagement/Paypass',
-                    #     "meta": {
-                    #         "i18n": 'Paypass',
-                    #         "keepAlive": True
-                    #     },
-                    #     "icon": 'icon-caidan',
-                    #     "children": []
-                    # }
-                ]
-            },
             {
                 "label": "缓存管理",
                 "path": 'Cache',

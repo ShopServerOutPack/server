@@ -1,5 +1,8 @@
 
 import time
+import datetime
+import random
+import calendar
 
 class UtilTime(object):
 
@@ -73,7 +76,7 @@ class UtilTime(object):
 				minutes = -1 减一分钟
 				seconds = -1 减一秒钟
 		"""
-        return arrow_v.replace(**kwargs)
+        return arrow_v.shift(**kwargs)
 
     #判断周几
     def get_week_day(self, todays=None):
@@ -117,6 +120,20 @@ def send_toTimestamp(t):
     t1=str(t)
     t2=time.strptime(t1[0:19],"%Y-%m-%d %H:%M:%S")
     return time.mktime(t2)
+
+def get_current_month_start_and_end(date):
+    """
+    年份 date(2017-09-08格式)
+    :param date:
+    :return:本月第一天日期和本月最后一天日期
+    """
+    if date.count('-') != 2:
+        raise ValueError('- is error')
+    year, month = str(date).split('-')[0], str(date).split('-')[1]
+    end = calendar.monthrange(int(year), int(month))[1]
+    start_date = '%s-%s-01' % (year, month)
+    end_date = '%s-%s-%s' % (year, month, end)
+    return start_date, end_date
 
 if __name__ == '__main__':
 

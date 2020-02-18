@@ -8,6 +8,7 @@ from project.config_include.params import WECHAT_PAY_KEY,WECHAT_APPID,CALLBACKUR
 from lib.utils.exceptions import PubErrorCustom
 from app.order.models import Order
 from app.user.models import Users
+from app.user.models import BalList
 
 class wechatPay(object):
 
@@ -112,9 +113,13 @@ class wechatPay(object):
                 order.save()
 
                 user = Users.objects.select_for_update().get(userid=order.userid)
+
+                updBalList(user,order,order.amount,user.bal,user.bal,"微信支付")
                 if float(order.balamount>0.0):
+                    tmp = user.bal
                     user.bal -= float(order.balamount)
                     user.save()
+                    updBalList(user, order, order.amount, tmp, user.bal, "余额支付")
             else:
                 raise Exception("error")
         else:
@@ -152,11 +157,38 @@ class wechatPay(object):
                 order.save()
 
                 user = Users.objects.select_for_update().get(userid=order.userid)
+                updBalList(user,order,order.amount,user.bal,user.bal,"微信支付")
+
                 if float(order.balamount>0.0):
+                    tmp = user.bal
                     user.bal -= float(order.balamount)
                     user.save()
+                    updBalList(user, order, order.amount, tmp, user.bal, "余额支付")
                 return {"data": True}
             else:
                 return {"data":False}
         else:
             return {"data":False}
+
+
+
+def updBalList(user,order,amount,bal,confirm_bal,memo):
+    """
+
+    :param user:
+    :param order:
+    :param amount:
+    :param bal:
+    :param confirm_bal:
+    :param memo:
+    :return:
+    """
+
+    BalList.objects.create(**{
+        "userid":user.userid,
+        "amount" : amount,
+        "bal":bal,
+        "confirm_bal":confirm_bal,
+        "memo":memo,
+        "orderid":order.orderid
+    })

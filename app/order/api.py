@@ -158,13 +158,16 @@ class OrderAPIView(viewsets.ViewSet):
 
         amount = float(order.amount)
 
+        order.balamount = 0.0
+        order.payamount = 0.0
+
         print(request.data_format.get('usebal'))
         if request.data_format.get('usebal'):
             if float(user.bal) >= amount:
-                user.bal = float(user.bal) - amount
+                # user.bal = float(user.bal) - amount
                 order.balamount = amount
                 order.status = '1'
-                user.save()
+                # user.save()
                 order.save()
                 return {"data":{"usebalall":True}}
             else:

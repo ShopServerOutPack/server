@@ -12,6 +12,9 @@ from app.order.models import Order
 from app.order.serialiers import OrderModelSerializer
 
 from lib.utils.mytime import send_toTimestamp
+from app.user.models import Users
+from app.order.models import Order,OrderGoodsLink
+from lib.utils.mytime import UtilTime,get_current_month_start_and_end
 
 class FilterWebAPIView(viewsets.ViewSet):
     @list_route(methods=['GET'])
@@ -113,3 +116,143 @@ class FilterWebAPIView(viewsets.ViewSet):
             "data": OrderModelSerializer(res[page_start:page_end], many=True).data,
             "header":headers
         }
+
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True, isTicket=True)
+    def homeDataCount(self, request):
+
+        ut = UtilTime()
+
+        data={
+            "tableData":[],
+            "tips1":{
+                "lastday":{
+                    "amount":0.0,
+                    "number":0
+                },
+                "month":{
+                    "amount": 0.0,
+                    "number": 0
+                }
+            },
+            "counts": [
+                {"icon": "el-icon-user-solid", "desc": "关注人数(个)", "num": 0, "color": "bg-primary"},
+                {"icon": "el-icon-s-finance", "desc": "订单总数(笔)", "num": 0, "color": "bg-success"},
+                {"icon": "el-icon-s-order", "desc": "今日订单总金额(元)", "num": 0.0, "color": "bg-danger"},
+                {"icon": "el-icon-s-data", "desc": "本月销量(笔)", "num": 0, "color": "bg-warning"},
+            ],
+            "tips": [
+                {
+                    "title": "店铺及商品提示",
+                    "desc": "需要关注的店铺信息及待处理事项",
+                    "list": [
+                        {"name": "出售中", "value": "0"},
+                        {"name": "待回复", "value": "0"},
+                        {"name": "库存预警", "value": "0"},
+                        {"name": "仓库中", "value": "0"},
+                    ]
+                },
+                {
+                    "title": "交易提示",
+                    "desc": "本月内的交易订单",
+                    "list": [
+                        {"name": "待付款", "value": 0},
+                        {"name": "待发货", "value": 0},
+                        {"name": "已发货", "value": 0},
+                        {"name": "已收货", "value": 0},
+                        {"name": "退款中", "value": 0},
+                        {"name": "待售后", "value": 0},
+                    ]
+                },
+            ]
+        }
+        data['counts'][0]['num'] = Users.objects.filter(rolecode='4001').count()
+        data['counts'][1]['num'] = Order.objects.filter().count()
+
+        start_date = ut.string_to_timestamp(ut.arrow_to_string(format_v="YYYY-MM-DD") + ' 00:00:00')
+        end_date = ut.string_to_timestamp(ut.arrow_to_string(format_v="YYYY-MM-DD") + ' 23:59:59')
+        data['counts'][2]['num'] = 0.0
+        orders = Order.objects.filter(createtime__lte = end_date , createtime__gte = start_date )
+        if orders.exists():
+            for item in orders:
+                data['counts'][2]['num'] += float(item.amount)
+
+        #本月的第一天  和最后一天
+        start_date,end_date = get_current_month_start_and_end(ut.arrow_to_string(format_v="YYYY-MM-DD"))
+
+        start_date = ut.string_to_timestamp(start_date + ' 00:00:00')
+        end_date = ut.string_to_timestamp(end_date + ' 23:59:59')
+
+        orders = Order.objects.filter(createtime__lte=end_date, createtime__gte=start_date)
+        if orders.exists():
+            for item in orders:
+                if item.status=='1':
+                    data['counts'][3]['num'] += 1
+                    data['tips1']['month']['amount'] += float(item.amount)
+                    data['tips1']['month']['number'] += 1
+
+                if item.status == '0':
+                    data['tips'][1]['list'][0]['value'] += 1
+                elif item.status == '1' and item.fhstatus =='1':
+                    data['tips'][1]['list'][1]['value'] += 1
+                elif item.status == '1' and item.fhstatus =='0':
+                    data['tips'][1]['list'][2]['value'] += 1
+                    data['tips'][1]['list'][3]['value'] += 1
+
+
+        #昨天的销售情况
+        start_date = ut.string_to_timestamp(ut.arrow_to_string(ut.today.shift(days=-1),format_v="YYYY-MM-DD") + ' 00:00:00' )
+        end_date = ut.string_to_timestamp(ut.arrow_to_string(ut.today.shift(days=-1),format_v="YYYY-MM-DD") + ' 23:59:59')
+
+        orders = Order.objects.filter(createtime__lte = end_date , createtime__gte = start_date,status=1 )
+        if orders.exists():
+            for item in orders:
+                data['tips1']['lastday']['amount'] += float(item.amount)
+                data['tips1']['lastday']['number'] += 1
+
+        #当天商品销量排行榜
+        start_date = ut.string_to_timestamp(ut.arrow_to_string(format_v="YYYY-MM-DD") + ' 00:00:00')
+        end_date = ut.string_to_timestamp(ut.arrow_to_string(format_v="YYYY-MM-DD") + ' 23:59:59')
+
+        oLinks = {}
+        oGLs = OrderGoodsLink.objects.filter(createtime__lte = end_date , createtime__gte = start_date)
+        if oGLs.exists():
+            for item in oGLs:
+                if item.gdid not in oLinks:
+                    oLinks[item.gdid] = {
+                        "name":item.gdname,
+                        "num":item.gdnum
+                    }
+                else:
+                    oLinks[item.gdid]['num'] += item.gdnum
+
+        tableData= [ oLinks[item] for item in oLinks ]
+        tableData.sort(key=lambda k: (k.get('num', 0)), reverse=False)
+        data['tableData'] = tableData[:10] if len(tableData)>=10 else tableData
+
+        #折线图
+        item_count = 7
+        data_1 = []
+        data_2 = []
+
+        day = ut.today.shift(days=-7)
+        while item_count:
+            day = ut.replace(arrow_v=day, days=1)
+
+            day_string = ut.arrow_to_string(arrow_s=day, format_v="YYYY-MM-DD")[0:10]
+
+            amount = 0.0
+            for item in Order.objects.filter(createtime__lte=ut.string_to_arrow(day_string + ' 23:59:59').timestamp,
+                                        createtime__gte=ut.string_to_arrow(day_string + ' 00:00:01').timestamp,
+                                        status='1'):
+                amount += float(item.confirm_amount)
+
+            data_1.append(day_string.replace('-', '')[4:])
+            data_2.append(amount)
+            item_count -= 1
+
+        data['data_1'] = data_1
+        data['data_2'] = data_2
+
+        return {"data":data}

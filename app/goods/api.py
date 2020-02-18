@@ -240,6 +240,30 @@ class GoodsAPIView(viewsets.ViewSet):
 
         return None
 
+
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True,
+                    isPasswd=True,
+                    isTicket=True)
+    def saveCard1(self, request, *args, **kwargs):
+
+        card = Card.objects.create(**{
+            "userid": request.user['userid'],
+            "type": request.data_format.get("type"),
+            "account" : request.data_format.get("account"),
+            "password": request.data_format.get("password"),
+        })
+
+        RedisCaCheHandler(
+            method="save",
+            serialiers="CardModelSerializerToRedis",
+            table="card",
+            filter_value=card,
+            must_key="id",
+        ).run()
+
+        return None
+
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True, isTicket=True, isPagination=True)
     def getCard(self, request, *args, **kwargs):

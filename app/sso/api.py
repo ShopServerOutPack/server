@@ -36,6 +36,7 @@ class SsoAPIView(viewsets.ViewSet):
         wechat_res = send_request_other(
             url="https://api.weixin.qq.com/sns/jscode2session",
             params=params)
+        print(wechat_res)
         if not wechat_res.get("openid"):
             raise PubErrorCustom("获取用户错误,腾讯接口有误!")
 

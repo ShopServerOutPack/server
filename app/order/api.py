@@ -12,6 +12,7 @@ from app.cache.utils import RedisCaCheHandler
 from app.order.models import Order,OrderGoodsLink
 
 from app.user.models import Users
+from app.user.serialiers import UsersSerializers
 
 from app.order.serialiers import OrderModelSerializer,AddressModelSerializer
 from app.order.models import Address
@@ -19,6 +20,8 @@ from app.order.models import Address
 from app.goods.models import Card
 
 from app.order.utils import wechatPay
+from lib.utils.db import RedisTokenHandler
+from app.order.utils import updBalList
 
 class OrderAPIView(viewsets.ViewSet):
 
@@ -269,6 +272,7 @@ class OrderAPIView(viewsets.ViewSet):
     @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
     def cardCz(self,request):
 
+        rUser=None
         print(request.data_format)
         account = request.data_format['account']
         password = request.data_format['password']
@@ -276,7 +280,7 @@ class OrderAPIView(viewsets.ViewSet):
         try:
             card = Card.objects.select_for_update().get(account=account,password=password,type='0')
             if card.useuserid>0:
-                return {"data": False}
+                return {"data": {"a": False}}
         except Card.DoesNotExist:
             return {"data":False}
         try:
@@ -285,7 +289,21 @@ class OrderAPIView(viewsets.ViewSet):
             raise PubErrorCustom("用户非法!")
 
 
+        tmp = user.bal
         user.bal = float(user.bal+card.bal)
+
+
+        if card.rolecode == user.rolecode:
+            flag = False
+        else:
+            request.user['rolecode'] = card.rolecode
+            RedisTokenHandler(key=request.ticket).redis_dict_set(request.user)
+            rUser =  UsersSerializers(user, many=False).data
+            flag = True
+
+        updBalList(user=user, order=None, amount=card.bal, bal=tmp, confirm_bal=user.bal, memo="充值卡充值",cardno=card.account)
+
+        user.rolecode = card.rolecode
         user.save()
 
         card.useuserid = user.userid
@@ -299,7 +317,7 @@ class OrderAPIView(viewsets.ViewSet):
             must_key="id",
         ).run()
 
-        return {"data":True}
+        return {"data":{"a":True,"b":flag,"rUser":rUser}}
 
 
     @list_route(methods=['POST'])

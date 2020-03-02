@@ -55,6 +55,14 @@ class GoodsCateGoryModelSerializerToRedis(serializers.ModelSerializer):
     createtime_format = serializers.SerializerMethodField()
     status_format = serializers.SerializerMethodField()
 
+    rolename = serializers.SerializerMethodField()
+
+    def get_rolename(self,obj):
+        try:
+            return Role.objects.get(rolecode=obj.rolecode).name
+        except Role.DoesNotExist:
+            return ""
+
     def get_status_format(self,obj):
         return '是' if obj.status == '0' else '否'
 
@@ -69,6 +77,14 @@ class GoodsThemeModelSerializerToRedis(serializers.ModelSerializer):
 
     createtime_format = serializers.SerializerMethodField()
     status_format = serializers.SerializerMethodField()
+
+    rolename = serializers.SerializerMethodField()
+
+    def get_rolename(self, obj):
+        try:
+            return Role.objects.get(rolecode=obj.rolecode).name
+        except Role.DoesNotExist:
+            return ""
 
     def get_status_format(self,obj):
         return '是' if obj.status == '0' else '否'
@@ -89,6 +105,14 @@ class GoodsModelSerializerToRedis(serializers.ModelSerializer):
 
     gdstatus_format = serializers.SerializerMethodField()
 
+    rolename = serializers.SerializerMethodField()
+
+    def get_rolename(self,obj):
+        try:
+            return Role.objects.get(rolecode=obj.rolecode).name
+        except Role.DoesNotExist:
+            return ""
+
     def get_gdstatus_format(self,obj):
         return '是' if obj.gdstatus == '0' else '否'
 
@@ -104,6 +128,7 @@ class CardModelSerializerToRedis(serializers.ModelSerializer):
 
     createtime_format = serializers.SerializerMethodField()
 
+    role = serializers.SerializerMethodField()
     # username = serializers.SerializerMethodField()
     bal = serializers.DecimalField(max_digits=18,decimal_places=2)
 
@@ -112,6 +137,13 @@ class CardModelSerializerToRedis(serializers.ModelSerializer):
 
     def get_createtime_format(self,obj):
         return UtilTime().timestamp_to_string(obj.createtime)
+
+    def get_role(self,obj):
+        try:
+            roleObj = Role.objects.get(rolecode=obj.rolecode)
+            return RoleModelSerializerToRedis(roleObj,many=False).data
+        except Role.DoesNotExist:
+            raise PubErrorCustom("无此角色信息!")
 
     class Meta:
         model = Card

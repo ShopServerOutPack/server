@@ -1,7 +1,7 @@
 
 import json
 from rest_framework import serializers
-from app.user.models import Users
+from app.user.models import Users,Role
 from lib.utils.mytime import UtilTime
 
 class UsersSerializers(serializers.Serializer):
@@ -14,6 +14,16 @@ class UsersModelSerializer(serializers.ModelSerializer):
 
     createtime_format = serializers.SerializerMethodField()
     bal = serializers.DecimalField(max_digits=16, decimal_places=2)
+
+    rolename = serializers.SerializerMethodField()
+
+
+    def get_rolename(self,obj):
+        try:
+            roleObj = Role.objects.get(rolecode=obj.rolecode)
+            return roleObj.name
+        except Role.DoesNotExist:
+            return "未知"
 
     def get_createtime_format(self,obj):
         return UtilTime().timestamp_to_string(obj.createtime)

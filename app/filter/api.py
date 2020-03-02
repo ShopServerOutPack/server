@@ -12,11 +12,23 @@ from app.cache.utils import RedisCaCheHandler
 from app.order.models import Address
 from app.order.serialiers import AddressModelSerializer
 
+from lib.utils.db import RedisTokenHandler
+
 class FilterAPIView(viewsets.ViewSet):
 
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True)
     def getHomeData(self,request):
+
+        rolecode = None
+
+        ticket = request.META.get('HTTP_TICKET')
+        if ticket:
+            result = RedisTokenHandler(key=ticket).redis_dict_get()
+            if result:
+                rolecode = result.get("rolecode")
+
+        print("角色:[%s]"%rolecode)
 
         rdata={
             "banners":[],
@@ -46,7 +58,7 @@ class FilterAPIView(viewsets.ViewSet):
             method="filter",
             serialiers="GoodsThemeModelSerializerToRedis",
             table="goodstheme",
-            filter_value={"status":"0","type":"0"}
+            filter_value={"status":"0","type":"0","rolecode":rolecode if rolecode else '4001'}
         ).run() ]
         rdata['category_hot'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
@@ -61,7 +73,7 @@ class FilterAPIView(viewsets.ViewSet):
             method="filter",
             serialiers="GoodsThemeModelSerializerToRedis",
             table="goodstheme",
-            filter_value={"status":"0","type":"1"}
+            filter_value={"status":"0","type":"1","rolecode":rolecode if rolecode else '4001'}
         ).run() ]
         rdata['category_tj'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
@@ -192,6 +204,16 @@ class FilterAPIView(viewsets.ViewSet):
         :return:
         """
 
+        rolecode = None
+
+        ticket = request.META.get('HTTP_TICKET')
+        if ticket:
+            result = RedisTokenHandler(key=ticket).redis_dict_get()
+            if result:
+                rolecode = result.get("rolecode")
+
+        print("角色:[%s]" % rolecode)
+
         obj = [ dict(
             gdcgid = item['gdcgid'],
             gdcgname = item['gdcgname'],
@@ -201,7 +223,7 @@ class FilterAPIView(viewsets.ViewSet):
             method="filter",
             serialiers="GoodsCateGoryModelSerializerToRedis",
             table="goodscategory",
-            filter_value={"status":"0"}
+            filter_value={"status":"0","rolecode":rolecode if rolecode else '4001'}
         ).run() ]
 
         obj.sort(key=lambda k: (k.get('sort', 0)), reverse=False)

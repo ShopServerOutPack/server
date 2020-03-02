@@ -20,6 +20,7 @@ class GoodsCateGory(models.Model):
     gdcglastid = models.IntegerField(verbose_name="上级代码",default=0)
 
     goods = models.TextField(verbose_name="商品ID集合",default="goods:[]",blank=True)
+    rolecode = models.CharField(max_length=4, default='', verbose_name="商品对应的用户类型")
 
     level = models.IntegerField(verbose_name="第几层",default=1,blank=True)
     sort = models.IntegerField(verbose_name="排序",default=0,blank=True)
@@ -60,6 +61,8 @@ class Goods(models.Model):
     gdtext = models.CharField(max_length=255, verbose_name="描述", default='', null=True,blank=True)
     gdlabel = models.CharField(max_length=255, verbose_name="标签", default='', null=True,blank=True)
     gdimg = models.CharField(max_length=255, verbose_name="封面图", default='', null=True,blank=True)
+
+    rolecode = models.CharField(max_length=4, default='', verbose_name="商品对应的用户类型")
 
     gdprice = models.DecimalField(max_digits=18,decimal_places=6,default=0.000,verbose_name="商品价格")
     gdnum  = models.IntegerField(verbose_name="商品数量",default=0)
@@ -107,6 +110,7 @@ class GoodsTheme(models.Model):
     type = models.CharField(max_length=1,default="0",verbose_name="0-热门分类,1-推荐分类",blank=True)
     name = models.CharField(max_length=120, default="",verbose_name="分类名称",null=True,blank=True)
     sort = models.IntegerField(verbose_name="排序",default=0,blank=True)
+    rolecode = models.CharField(max_length=4, default='', verbose_name="商品对应的用户类型")
     status = models.CharField(max_length=1, default="1",verbose_name="是否上架,0-是,1-否",null=True,blank=True)
     goods = models.TextField(verbose_name="商品ID集合",default="goods:[]",blank=True)
     url = models.CharField(max_length=255,default="",blank=True)
@@ -147,6 +151,8 @@ class Card(models.Model):
     password = models.CharField(verbose_name="密码",max_length=60,default="")
     bal  = models.DecimalField(max_digits=18,decimal_places=6,default=0.000,verbose_name="面值")
 
+    rolecode = models.CharField(max_length=4, default='',verbose_name="卡号对应的用户类型")
+
     createtime = models.BigIntegerField(default=0,blank=True)
     updtime = models.BigIntegerField(default=0,blank=True)
 
@@ -158,7 +164,7 @@ class Card(models.Model):
             self.account = idGenerator.getcardid()
 
         if not self.password:
-            self.password = random.randint(100000,999999)
+            self.password = random.randint(10000000,99999999)
 
         if not self.createtime:
             self.createtime = UtilTime().timestamp

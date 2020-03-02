@@ -172,7 +172,7 @@ class wechatPay(object):
 
 
 
-def updBalList(user,order,amount,bal,confirm_bal,memo):
+def updBalList(user,order,amount,bal,confirm_bal,memo,cardno=None):
     """
 
     :param user:
@@ -184,11 +184,12 @@ def updBalList(user,order,amount,bal,confirm_bal,memo):
     :return:
     """
 
+    print(cardno,order)
     BalList.objects.create(**{
         "userid":user.userid,
         "amount" : amount,
         "bal":bal,
         "confirm_bal":confirm_bal,
         "memo":memo,
-        "orderid":order.orderid
+        "orderid":order.orderid if order else cardno
     })

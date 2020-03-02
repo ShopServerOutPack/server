@@ -41,7 +41,7 @@ class RedisIdGeneratorForCard(RedisIdGenerator):
         super().__init__(**kwargs)
 
     def run(self):
-        return "%s%05d"%("CZ",self.redis_client.incr(self.key))
+        return "%s%018d"%("CZ",self.redis_client.incr(self.key))
 
 
 class RedisIdGeneratorForUser(RedisIdGenerator):

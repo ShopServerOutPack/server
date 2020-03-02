@@ -6,7 +6,7 @@ from lib.core.decorator.response import Core_connector
 
 from app.cache.utils import RedisCaCheHandler
 from app.user.serialiers import UsersModelSerializer
-from app.user.models import Users
+from app.user.models import Users,Role
 
 class UserAPIView(viewsets.ViewSet):
 
@@ -14,13 +14,16 @@ class UserAPIView(viewsets.ViewSet):
     @Core_connector(isTicket=True,isPasswd=True)
     def getUserInfo(self, request):
 
+
+
         return {"data": {
             "userInfo": {
                 "username": request.user.get("uuid"),
                 "name": request.user.get("name"),
                 'rolecode': request.user.get("role").get("rolecode"),
                 "rolename": request.user.get("role").get("rolename"),
-                "avatar": 'http://allwin6666.com/nginx_upload/assets/login.jpg'
+                "avatar": '',
+                'roles': [ {"name":item.name,"rolecode":item.rolecode} for item in Role.objects.filter(rolecode__startswith='4')]
             },
             "roles": request.user.get("role").get("rolecode"),
             "permission": []
@@ -29,6 +32,6 @@ class UserAPIView(viewsets.ViewSet):
     @list_route(methods=['GET'])
     @Core_connector(isTicket=True,isPasswd=True,isPagination=True)
     def getUser(self, request):
-        query = Users.objects.filter(rolecode=request.query_params_format.get("rolecode"))
+        query = Users.objects.filter(rolecode__startswith='4')
 
         return {"data": UsersModelSerializer(query,many=True).data}

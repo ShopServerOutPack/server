@@ -227,6 +227,7 @@ class GoodsAPIView(viewsets.ViewSet):
                 "userid" : request.user['userid'],
                 "type": request.data_format.get("type"),
                 "bal" : request.data_format.get("bal"),
+                "rolecode" : request.data_format.get("rolecode")
             }))
 
         for item in cards:

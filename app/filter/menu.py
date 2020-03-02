@@ -112,17 +112,17 @@ first = [
         "icon": 'el-icon-bank-card',
         "children": []
     },
-    {
-        "label": "虚拟商品卡密管理",
-        "path": '/yhcard',
-        "component": 'views/wechatHandler/yhcard',
-        "meta": {
-            "i18n": 'yhcard',
-            "keepAlive": True
-        },
-        "icon": 'el-icon-bank-card',
-        "children": []
-    },
+    # {
+    #     "label": "虚拟商品卡密管理",
+    #     "path": '/yhcard',
+    #     "component": 'views/wechatHandler/yhcard',
+    #     "meta": {
+    #         "i18n": 'yhcard',
+    #         "keepAlive": True
+    #     },
+    #     "icon": 'el-icon-bank-card',
+    #     "children": []
+    # },
     # {
     #     "label": "小程序管理",
     #     "path": '/wechatHandler',

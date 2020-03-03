@@ -9,7 +9,7 @@ import os
 
 import os
 
-BASEURL = os.getenv("BASEURL","https://sky.ibwcx.cn")
+BASEURL = os.getenv("BASEURL","http://localhost:9006")
 APIURL = "{}{}".format(BASEURL,"/v1/api")
 CALLBACKURL = "{}{}".format(APIURL,"/order/txPayCallback")
 

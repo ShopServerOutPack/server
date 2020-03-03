@@ -184,6 +184,26 @@ first = [
                 "icon": 'el-icon-setting',
                 "children": []
             },
+            {
+                "label": "系统参数",
+                "path": 'Sysparams',
+                "component": 'views/systemManagement/sysparams',
+                "meta": {
+                    "i18n": 'sysparams'
+                },
+                "icon": 'el-icon-setting',
+                "children": []
+            },
+            {
+                "label": "角色维护",
+                "path": 'Role',
+                "component": 'views/systemManagement/role',
+                "meta": {
+                    "i18n": 'role'
+                },
+                "icon": 'el-icon-setting',
+                "children": []
+            },
         ]
     }
 ]

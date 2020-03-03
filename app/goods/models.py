@@ -55,6 +55,8 @@ class Goods(models.Model):
     userid = models.BigIntegerField(verbose_name="用户代码",null=True)
     gdid = models.CharField(max_length=10, verbose_name="商品ID", null=True)
 
+    gdcgid = models.CharField(max_length=10,default="",verbose_name="分类代码",null=True)
+
     gdname = models.CharField(max_length=120, verbose_name="商品名称", default='', null=True,blank=True)
     gdtitle = models.CharField(max_length=120, verbose_name="商品名称", default='', null=True,blank=True)
 
@@ -131,6 +133,42 @@ class GoodsTheme(models.Model):
         verbose_name = '商品主题分类表'
         verbose_name_plural = verbose_name
         db_table = 'goodstheme'
+
+class Cardvirtual(models.Model):
+
+    """
+    卡片
+    """
+
+    id = models.AutoField(primary_key=True)
+
+    userid = models.BigIntegerField(verbose_name="用户代码",null=True)
+
+    useuserid = models.BigIntegerField(verbose_name="使用用户",default=0)
+    status = models.CharField(max_length=1,verbose_name="使用状态,0-使用,1-未使用",default='1')
+
+    account = models.CharField(verbose_name="卡号",max_length=60,default="")
+    password = models.CharField(verbose_name="密码",max_length=60,default="")
+
+    createtime = models.BigIntegerField(default=0,blank=True)
+    updtime = models.BigIntegerField(default=0,blank=True)
+
+    gdid = models.CharField(max_length=10, verbose_name="商品ID", null=True)
+
+    username=None
+
+    def save(self, *args, **kwargs):
+
+        if not self.createtime:
+            self.createtime = UtilTime().timestamp
+            print(self.createtime)
+        self.updtime = UtilTime().timestamp
+        return super(Cardvirtual, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = '虚拟商品卡密'
+        verbose_name_plural = verbose_name
+        db_table = 'cardvirtual'
 
 
 class Card(models.Model):

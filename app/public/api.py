@@ -5,10 +5,28 @@ from lib.core.decorator.response import Core_connector
 
 from lib.utils.exceptions import PubErrorCustom
 
-from app.public.models import Banner,AttachMent,AttachMentGroup,OtherMemo
+from app.public.models import Banner,AttachMent,AttachMentGroup,OtherMemo,Sysparams
 from app.cache.utils import RedisCaCheHandler
 
 class PublicAPIView(viewsets.ViewSet):
+
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True, isPasswd=True)
+    def updSysparams(self, request):
+
+        obj = Sysparams.objects.get()
+        obj.url = request.data_format.get("url")
+        obj.save()
+
+        return None
+
+    @list_route(methods=['GET'])
+    @Core_connector( isPasswd=True)
+    def getSysparams(self, request):
+
+        obj = Sysparams.objects.get()
+
+        return {"data":{"url":obj.url}}
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True)

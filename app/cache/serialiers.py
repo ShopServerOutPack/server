@@ -105,7 +105,20 @@ class GoodsModelSerializerToRedis(serializers.ModelSerializer):
 
     gdstatus_format = serializers.SerializerMethodField()
 
+    virtual_format = serializers.SerializerMethodField()
+
     rolename = serializers.SerializerMethodField()
+
+    # gdcgname = serializers.SerializerMethodField()
+    #
+    # def get_gdcgname(self,obj):
+    #     try:
+    #         return GoodsCateGory.objects.get(gdcgid=obj.gdcgid).name
+    #     except GoodsCateGory.DoesNotExist:
+    #         return ""
+
+    def get_virtual_format(self,obj):
+        return '是' if obj.virtual == '0' else '否'
 
     def get_rolename(self,obj):
         try:

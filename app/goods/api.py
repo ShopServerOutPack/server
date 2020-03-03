@@ -8,9 +8,9 @@ from app.user.models import Users
 from lib.utils.exceptions import PubErrorCustom
 
 from app.cache.utils import RedisCaCheHandler
-
-from app.goods.models import GoodsCateGory,Goods,GoodsTheme,Card
-from app.goods.serialiers import GoodsCateGoryModelSerializer,GoodsModelSerializer,GoodsThemeModelSerializer,CardModelSerializer
+from lib.utils.db import RedisCaCheHandlerBase
+from app.goods.models import GoodsCateGory,Goods,GoodsTheme,Card,Cardvirtual
+from app.goods.serialiers import GoodsCateGoryModelSerializer,GoodsModelSerializer,GoodsThemeModelSerializer,CardModelSerializer,CardvirtualModelSerializer
 
 class GoodsAPIView(viewsets.ViewSet):
 
@@ -87,6 +87,20 @@ class GoodsAPIView(viewsets.ViewSet):
         print(obj)
         return {"data":obj}
 
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True, isTicket=True)
+    def getGoodsCategorys(self, request, *args, **kwargs):
+
+        obj = RedisCaCheHandler(
+            method="filter",
+            serialiers="GoodsCateGoryModelSerializerToRedis",
+            table="goodscategory",
+            filter_value=request.query_params_format
+        ).run()
+
+        return {"data":obj}
+
+
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isTicket=True,isPasswd=True)
     def delGoodsCategory(self,request,*args, **kwargs):
@@ -112,6 +126,17 @@ class GoodsAPIView(viewsets.ViewSet):
         serializer = kwargs.pop("serializer")
         obj = serializer.save()
         obj.userid = request.user.get('userid')
+        if obj.virtual == '0':
+            if request.data_format.get("xuni"):
+                obj.gdnum += len(request.data_format.get("xuni"))
+
+                for item in request.data_format.get("xuni"):
+                    Cardvirtual.objects.create(**{
+                        "userid":request.user.get('userid'),
+                        "account":item.get("card"),
+                        "password":item.get("password"),
+                        "gdid":obj.gdid
+                    })
         obj.save()
 
         RedisCaCheHandler(
@@ -123,6 +148,14 @@ class GoodsAPIView(viewsets.ViewSet):
         ).run()
 
         return None
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True,isTicket=True,isPagination=True)
+    def getGoodsVirtual(self,request,*args, **kwargs):
+
+        queryObj = Cardvirtual.objects.filter(gdid=request.query_params_format.get("gdid"))
+
+        return {"data": CardvirtualModelSerializer(queryObj,many=True).data}
 
 
     @list_route(methods=['GET'])
@@ -136,8 +169,13 @@ class GoodsAPIView(viewsets.ViewSet):
             filter_value=request.query_params_format
         ).run()
 
-        print(request.query_params_format)
-        print(obj)
+        if obj:
+            RClass = RedisCaCheHandlerBase(key="goodscategory")
+            for item in obj:
+                print(item)
+                res = RClass.redis_dict_get(item.get("gdcgid"))
+                if res:
+                    item['gdcgname'] = res['gdcgname']
 
         return {"data":obj}
 

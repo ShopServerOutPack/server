@@ -81,3 +81,14 @@ class OtherMemo(models.Model):
         verbose_name = '公告联系我们'
         verbose_name_plural = verbose_name
         db_table = 'othermemo'
+
+class Sysparams(models.Model):
+
+    id=models.AutoField(primary_key=True)
+    url = models.CharField(max_length=255,verbose_name="加入我们的图片地址")
+
+
+    class Meta:
+        verbose_name = '系统参数表'
+        verbose_name_plural = verbose_name
+        db_table = 'sysparams'

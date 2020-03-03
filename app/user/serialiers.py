@@ -4,6 +4,12 @@ from rest_framework import serializers
 from app.user.models import Users,Role
 from lib.utils.mytime import UtilTime
 
+class RoleModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Role
+        fields = '__all__'
+
 class UsersSerializers(serializers.Serializer):
 
     userid = serializers.IntegerField()

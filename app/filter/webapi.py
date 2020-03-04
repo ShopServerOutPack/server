@@ -246,7 +246,7 @@ class FilterWebAPIView(viewsets.ViewSet):
             for item in Order.objects.filter(createtime__lte=ut.string_to_arrow(day_string + ' 23:59:59').timestamp,
                                         createtime__gte=ut.string_to_arrow(day_string + ' 00:00:01').timestamp,
                                         status='1'):
-                amount += float(item.confirm_amount)
+                amount += float(item.amount)
 
             data_1.append(day_string.replace('-', '')[4:])
             data_2.append(amount)

@@ -14,10 +14,10 @@ from app.order.models import Order,OrderGoodsLink
 from app.user.models import Users
 from app.user.serialiers import UsersSerializers
 
-from app.order.serialiers import OrderModelSerializer,AddressModelSerializer
+from app.order.serialiers import OrderModelSerializer,AddressModelSerializer,OrderGoodsLinkModelSerializer
 from app.order.models import Address
 
-from app.goods.models import Card
+from app.goods.models import Card,Cardvirtual
 
 from app.order.utils import wechatPay
 from lib.utils.db import RedisTokenHandler
@@ -84,6 +84,7 @@ class OrderAPIView(viewsets.ViewSet):
         orderObj.linkid={"linkids":[]}
         orderObj.amount = 0.0
 
+        isvirtual = '0'
         for item in request.data_format['shopcart']:
             if not item['selected']:
                 continue
@@ -103,11 +104,17 @@ class OrderAPIView(viewsets.ViewSet):
                 gdimg = res['gdimg'],
                 gdname = res['gdname'],
                 gdprice = res['gdprice'],
-                gdnum = item['gdnum']
+                gdnum = item['gdnum'],
+                virtual = res['virtual']
             ))
+
+            if res['virtual'] != '0':
+                isvirtual = '1'
 
             orderObj.linkid['linkids'].append(link.linkid)
             orderObj.amount += float(link.gdprice) * link.gdnum
+
+        orderObj.isvirtual = isvirtual
         orderObj.linkid=json.dumps(orderObj.linkid)
         orderObj.save()
 
@@ -159,6 +166,29 @@ class OrderAPIView(viewsets.ViewSet):
         except Order.DoesNotExist:
             raise PubErrorCustom("订单异常!")
 
+        for item in OrderGoodsLink.objects.filter(linkid__in=json.loads(order.linkid)['linkids']).order_by("-updtime"):
+            #是虚拟商品
+            if item.virtual == '0':
+                cards = Cardvirtual.objects.filter(gdid=item.gdid,status='1').order_by('createtime')
+                if cards.exists():
+                    if len(cards) < item.gdnum:
+                        raise PubErrorCustom("暂无存货!")
+
+                    virtualids = json.loads(item.virtualids)
+                    count = 0
+                    for card in cards:
+                        count +=1
+                        virtualids['ids'].append({"id":card.id,"account":card.account,"password":card.account})
+                        card.status = '0'
+                        card.useuserid = user.userid
+                        card.save()
+                        if count == item.gdnum:
+                            break
+                    item.virtualids = json.dumps(virtualids)
+                    item.save()
+                else:
+                    raise PubErrorCustom("暂无存货!")
+
         amount = float(order.amount)
 
         order.balamount = 0.0
@@ -170,6 +200,8 @@ class OrderAPIView(viewsets.ViewSet):
                 # user.bal = float(user.bal) - amount
                 order.balamount = amount
                 order.status = '1'
+                if order.isvirtual == '0':
+                    order.fhstatus = '0'
                 # user.save()
                 order.save()
                 return {"data":{"usebalall":True}}
@@ -183,7 +215,7 @@ class OrderAPIView(viewsets.ViewSet):
         data = wechatPay().request({
             "out_trade_no" : order.orderid,
             "total_fee" : int(amount * 100),
-            "spbill_create_ip" : "192.168.0.1",
+            "spbill_create_ip" : request.META.get("HTTP_X_REAL_IP"),
             "openid": user.uuid
         })
 
@@ -207,6 +239,21 @@ class OrderAPIView(viewsets.ViewSet):
             return HttpResponse("""<xml><return_code><![CDATA[FAIL]]></return_code>                          
                                     <return_msg><![CDATA[Signature_Error]]></return_msg></xml>""",
                                          content_type = 'text/xml', status = 200)
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True,isTicket=True)
+    def getCardForOrder(self, request):
+
+        if not request.query_params_format.get("id"):
+            raise PubErrorCustom("系统错误,请联系客服人员!")
+
+        try:
+            obj = OrderGoodsLink.objects.get(linkid=request.query_params_format.get("id"))
+        except OrderGoodsLink.DoesNotExist:
+            raise PubErrorCustom("系统错误,请联系客服人员!")
+
+        return {"data": json.loads(obj.virtualids).get('ids')}
+
 
 
     @list_route(methods=['GET'])
@@ -252,10 +299,20 @@ class OrderAPIView(viewsets.ViewSet):
         except Users.DoesNotExist:
             raise PubErrorCustom("用户不存在!")
 
+        order = OrderModelSerializer(orderQuery, many=False).data
+
+        isVirtual = True
+        for item in order['linkid']:
+            if item['virtual'] == '1':
+                isVirtual = False
+                break
+
+
         return {
             "data": {
-                "order":OrderModelSerializer(orderQuery, many=False).data,
-                "bal" : "%.2lf"%user.bal
+                "order":order,
+                "bal" : "%.2lf"%user.bal,
+                "isVirtual" : isVirtual
             }
         }
 

@@ -78,18 +78,29 @@ class FilterAPIView(viewsets.ViewSet):
         rdata['category_tj'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
         #新品数据
-        rdata['newgoods'] = [ dict(
-            gdid = item['gdid'],
-            gdname = item['gdname'],
-            gdimg = item['gdimg'],
-            gdprice = item['gdprice'],
-            sort = item['sort']
-        ) for item in RedisCaCheHandler(
-            method="filter",
-            serialiers="GoodsModelSerializerToRedis",
-            table="goods",
-                filter_value={"gdstatus":"0"}
-        ).run() ]
+
+
+        for item in RedisCaCheHandler(
+                method="filter",
+                serialiers="GoodsModelSerializerToRedis",
+                table="goods",
+                filter_value={"gdstatus": "0"}
+        ).run():
+            obj = RedisCaCheHandler(
+                method="get",
+                serialiers="GoodsCateGoryModelSerializerToRedis",
+                table="goodscategory",
+                must_key_value=item.get('gdcgid')
+            ).run()
+            if obj['rolecode'] == rolecode or obj['rolecode'] == '4001':
+                rdata['newgoods'].append(dict(
+                    gdid=item['gdid'],
+                    gdname=item['gdname'],
+                    gdimg=item['gdimg'],
+                    gdprice=item['gdprice'],
+                    sort=item['sort']
+                ))
+
         if len(rdata['newgoods']) >=6 :
             rdata['newgoods'] = rdata['newgoods'][:6]
         else:
@@ -175,20 +186,21 @@ class FilterAPIView(viewsets.ViewSet):
 
         if obj['status']=='0':
             goods = []
-            for gdid in json.loads(obj['goods'])['goods']:
-                res = RedisCaCheHandler(
-                    method="get",
-                    serialiers="GoodsModelSerializerToRedis",
-                    table="goods",
-                    must_key_value=gdid
-                ).run()
-                if res['gdstatus'] == '0':
-                    goods.append(dict(
-                        gdid=res['gdid'],
-                        gdimg=res['gdimg'],
-                        gdname=res['gdname'],
-                        sort = res['sort']
-                    ))
+
+            res = RedisCaCheHandler(
+                method="filter",
+                serialiers="GoodsModelSerializerToRedis",
+                table="goods",
+                filter_value={"gdstatus": "0", "gdcgid":obj['gdcgid']}
+            ).run()
+
+            for item in res:
+                goods.append(dict(
+                    gdid=item['gdid'],
+                    gdimg=item['gdimg'],
+                    gdname=item['gdname'],
+                    sort=item['sort']
+                ))
             goods.sort(key=lambda k: (k.get('sort', 0)), reverse=False)
             return {"data":goods}
         else:

@@ -110,6 +110,8 @@ class wechatPay(object):
 
                 order.paymsg = json.dumps(xmlmsg['xml'])
                 order.status=1
+                if order.isvirtual == '0':
+                    order.fhstatus = '0'
                 order.save()
 
                 user = Users.objects.select_for_update().get(userid=order.userid)
@@ -154,6 +156,8 @@ class wechatPay(object):
                 if order.status=='1':
                     return {"data": True}
                 order.status = 1
+                if order.isvirtual == '0':
+                    order.fhstatus = '0'
                 order.save()
 
                 user = Users.objects.select_for_update().get(userid=order.userid)

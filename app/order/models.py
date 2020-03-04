@@ -46,6 +46,8 @@ class OrderGoodsLink(models.Model):
     gdid = models.CharField(max_length=10, verbose_name="商品ID", null=True)
     gdimg = models.CharField(max_length=255, verbose_name="封面图", default='', null=True, blank=True)
     gdname = models.CharField(max_length=120, verbose_name="商品名称", default='', null=True, blank=True)
+    virtual = models.CharField(max_length=1,verbose_name="是否虚拟商品:0-是,1-否",default='1')
+    virtualids = models.CharField(max_length=2048,verbose_name="卡密集合",default='{"ids":[]}')
     gdprice = models.DecimalField(max_digits=18,decimal_places=6,default=0.000,verbose_name="商品价格")
     gdnum  = models.IntegerField(verbose_name="商品数量",default=0)
 
@@ -86,6 +88,8 @@ class Order(models.Model):
     fhstatus = models.CharField(max_length=1,verbose_name="0-已发货,1-未发货",default="1")
     paymsg = models.TextField(default="")
     address = models.TextField(default="{}")
+
+    isvirtual = models.CharField(max_length=1,verbose_name="是否都是虚拟商品 0-是,1-否",default="1")
 
     createtime = models.BigIntegerField(default=0)
     updtime = models.BigIntegerField(default=0)

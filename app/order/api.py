@@ -208,7 +208,9 @@ class OrderAPIView(viewsets.ViewSet):
                 order.save()
                 return {"data":{"usebalall":True}}
             else:
+                print(user.bal,amount)
                 amount -= float(user.bal)
+                print(amount)
                 order.balamount = user.bal
                 order.payamount = amount
                 order.save()

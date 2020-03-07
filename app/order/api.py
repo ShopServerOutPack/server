@@ -6,6 +6,7 @@ from rest_framework.decorators import list_route
 from django.db import transaction
 from django.http import HttpResponse
 from lib.core.decorator.response import Core_connector
+from decimal import *
 from lib.utils.exceptions import PubErrorCustom
 
 from app.cache.utils import RedisCaCheHandler
@@ -112,7 +113,7 @@ class OrderAPIView(viewsets.ViewSet):
                 isvirtual = '1'
 
             orderObj.linkid['linkids'].append(link.linkid)
-            orderObj.amount += float(link.gdprice) * link.gdnum
+            orderObj.amount += link.gdprice * link.gdnum
 
         orderObj.isvirtual = isvirtual
         orderObj.linkid=json.dumps(orderObj.linkid)
@@ -189,16 +190,16 @@ class OrderAPIView(viewsets.ViewSet):
                 else:
                     raise PubErrorCustom("暂无存货!")
 
-        amount = float(order.amount)
+        amount = Decimal(str(order.amount))
 
         order.balamount = 0.0
         order.payamount = 0.0
 
         print(request.data_format.get('usebal'))
         if request.data_format.get('usebal'):
-            if float(user.bal) >= amount:
+            if user.bal >= amount:
                 tmp = user.bal
-                user.bal = float(user.bal) - amount
+                user.bal -= amount
                 order.balamount = amount
                 order.status = '1'
                 if order.isvirtual == '0':
@@ -209,7 +210,7 @@ class OrderAPIView(viewsets.ViewSet):
                 return {"data":{"usebalall":True}}
             else:
                 print(user.bal,amount)
-                amount -= float(user.bal)
+                amount -= user.bal
                 print(amount)
                 order.balamount = user.bal
                 order.payamount = amount
@@ -351,7 +352,7 @@ class OrderAPIView(viewsets.ViewSet):
 
 
         tmp = user.bal
-        user.bal = float(user.bal+card.bal)
+        user.bal += card.bal
 
 
         if card.rolecode == user.rolecode:

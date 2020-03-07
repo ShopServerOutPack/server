@@ -3,6 +3,7 @@ import requests,string,random,time
 import hashlib
 import json
 import xmltodict
+from decimal import *
 
 from project.config_include.params import WECHAT_PAY_KEY,WECHAT_APPID,CALLBACKURL,WECHAT_PAY_MCHID,WECHAT_PAY_RETURN_KEY
 from lib.utils.exceptions import PubErrorCustom
@@ -101,9 +102,11 @@ class wechatPay(object):
                 out_trade_no = xmlmsg['xml']['out_trade_no']
                 total_fee = xmlmsg['xml']['total_fee']
 
+                total_fee = Decimal(str(total_fee))
+
 
                 order = Order.objects.select_for_update().get(orderid=out_trade_no)
-                if float(order.amount)*100 != float(total_fee):
+                if order.amount * 100 != total_fee:
                     raise Exception("金额不一致")
 
                 if order.status=='1':
@@ -118,9 +121,9 @@ class wechatPay(object):
                 user = Users.objects.select_for_update().get(userid=order.userid)
 
                 updBalList(user,order,order.amount,user.bal,user.bal,"微信支付")
-                if float(order.balamount>0.0):
+                if order.balamount>0.0:
                     tmp = user.bal
-                    user.bal = float(user.bal) - float(order.balamount)
+                    user.bal -= order.balamount
                     user.save()
                     updBalList(user, order, order.amount, tmp, user.bal, "余额支付")
             else:
@@ -164,9 +167,9 @@ class wechatPay(object):
                 user = Users.objects.select_for_update().get(userid=order.userid)
                 updBalList(user,order,order.amount,user.bal,user.bal,"微信支付")
 
-                if float(order.balamount>0.0):
+                if order.balamount>0.0:
                     tmp = user.bal
-                    user.bal = float(user.bal) - float(order.balamount)
+                    user.bal -= order.balamount
                     user.save()
                     updBalList(user, order, order.amount, tmp, user.bal, "余额支付")
                 return {"data": True}

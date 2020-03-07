@@ -113,7 +113,9 @@ class OrderAPIView(viewsets.ViewSet):
                 isvirtual = '1'
 
             orderObj.linkid['linkids'].append(link.linkid)
-            orderObj.amount += link.gdprice * link.gdnum
+            print(orderObj.amount,link.gdprice,link.gdnum)
+            print(type(orderObj.amount),type(link.gdprice),type(link.gdnum))
+            orderObj.amount += link.gdprice * int(link.gdnum)
 
         orderObj.isvirtual = isvirtual
         orderObj.linkid=json.dumps(orderObj.linkid)

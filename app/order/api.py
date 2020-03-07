@@ -197,11 +197,13 @@ class OrderAPIView(viewsets.ViewSet):
         print(request.data_format.get('usebal'))
         if request.data_format.get('usebal'):
             if float(user.bal) >= amount:
+                tmp = user.bal
                 user.bal = float(user.bal) - amount
                 order.balamount = amount
                 order.status = '1'
                 if order.isvirtual == '0':
                     order.fhstatus = '0'
+                updBalList(user, order, order.amount, tmp, user.bal, "余额支付")
                 user.save()
                 order.save()
                 return {"data":{"usebalall":True}}

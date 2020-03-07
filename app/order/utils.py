@@ -119,7 +119,7 @@ class wechatPay(object):
                 updBalList(user,order,order.amount,user.bal,user.bal,"微信支付")
                 if float(order.balamount>0.0):
                     tmp = user.bal
-                    user.bal -= float(order.balamount)
+                    user.bal = float(user.bal) - float(order.balamount)
                     user.save()
                     updBalList(user, order, order.amount, tmp, user.bal, "余额支付")
             else:
@@ -165,7 +165,7 @@ class wechatPay(object):
 
                 if float(order.balamount>0.0):
                     tmp = user.bal
-                    user.bal -= float(order.balamount)
+                    user.bal = float(user.bal) - float(order.balamount)
                     user.save()
                     updBalList(user, order, order.amount, tmp, user.bal, "余额支付")
                 return {"data": True}

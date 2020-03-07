@@ -50,6 +50,7 @@ class wechatPay(object):
         data['sign'] = self.hashdata(data,WECHAT_PAY_KEY)
 
         param = {'root': data}
+        print(param)
         xml = xmltodict.unparse(param)
 
         res = requests.request(method="POST",data=xml.encode('utf-8'),url=self.createUrl,headers={'Content-Type': 'text/xml'})

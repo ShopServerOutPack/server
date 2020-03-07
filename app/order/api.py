@@ -83,7 +83,7 @@ class OrderAPIView(viewsets.ViewSet):
             userid=request.user['userid']
         ))
         orderObj.linkid={"linkids":[]}
-        orderObj.amount = 0.0
+        orderObj.amount = Decimal("0.0")
 
         isvirtual = '0'
         for item in request.data_format['shopcart']:
@@ -104,13 +104,15 @@ class OrderAPIView(viewsets.ViewSet):
                 gdid = res['gdid'],
                 gdimg = res['gdimg'],
                 gdname = res['gdname'],
-                gdprice = res['gdprice'],
+                gdprice = Decimal(str(res['gdprice'])),
                 gdnum = item['gdnum'],
                 virtual = res['virtual']
             ))
 
             if res['virtual'] != '0':
                 isvirtual = '1'
+
+
 
             orderObj.linkid['linkids'].append(link.linkid)
             print(orderObj.amount,link.gdprice,link.gdnum)

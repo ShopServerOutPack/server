@@ -166,6 +166,7 @@ class OrderAPIView(viewsets.ViewSet):
         try:
             order = Order.objects.select_for_update().get(orderid=request.data_format.get('orderid',None))
             order.address = json.dumps(request.data_format.get('address',{}))
+            order.memo = request.data_format.get("memo","")
             if order.status=='1':
                 raise PubErrorCustom("此点单已付款!")
         except Order.DoesNotExist:

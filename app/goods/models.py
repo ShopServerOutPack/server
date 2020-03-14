@@ -73,6 +73,7 @@ class Goods(models.Model):
     sort = models.IntegerField(verbose_name="排序",default=0)
 
     qrcode = models.CharField(verbose_name="商品二维码",default='',max_length=255)
+    hb = models.CharField(verbose_name="海报",default="",max_length=255)
 
     gdsellnum = models.IntegerField(verbose_name="商品售出数量",default=0)
     gdstatus = models.CharField(verbose_name="状态,0-正常,1-下架",default='0',max_length=1)

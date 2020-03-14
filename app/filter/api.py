@@ -129,7 +129,8 @@ class FilterAPIView(viewsets.ViewSet):
                     gdprice = res['gdprice'],
                     detail = res['detail'],
                     product = res['product'],
-                    shbz = res['shbz']
+                    shbz = res['shbz'],
+                    qrcode = res['qrcode']
                 )
             }
         else:

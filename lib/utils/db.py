@@ -52,7 +52,6 @@ class RedisIdGeneratorForUser(RedisIdGenerator):
         super().__init__(**kwargs)
 
     def run(self):
-        print(self.key)
         return "%s%08d"%(self.key,self.redis_client.incr(self.key))
 
 class RedisIdGeneratorForOrder(RedisIdGenerator):

@@ -27,7 +27,6 @@ class FilterWebAPIView(viewsets.ViewSet):
         """
 
         type = self.request.query_params.get('type') if self.request.query_params.get("type") else "first"
-        print(type)
         return {"data":all_menu[type]}
 
     @list_route(methods=['GET'])
@@ -75,7 +74,6 @@ class FilterWebAPIView(viewsets.ViewSet):
             table="OtherMemo",
             filter_value=request.query_params_format
         ).run()
-        print(obj)
         return {"data": obj[0] if obj else False}
 
     @list_route(methods=['GET'])

@@ -89,7 +89,6 @@ class PublicAPIView(viewsets.ViewSet):
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True)
     def getAttachMent(self, request):
-        print(request.query_params_format)
         obj = RedisCaCheHandler(
             method="filter",
             serialiers="AttachMentModelSerializerToRedis",

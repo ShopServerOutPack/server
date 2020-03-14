@@ -5,6 +5,8 @@ from lib.utils.mytime import UtilTime
 
 from app.idGenerator import idGenerator
 
+from app.goods.utils import get_qrcode_wechat
+
 class GoodsCateGory(models.Model):
 
     """
@@ -70,6 +72,8 @@ class Goods(models.Model):
     gdnum  = models.IntegerField(verbose_name="商品数量",default=0)
     sort = models.IntegerField(verbose_name="排序",default=0)
 
+    qrcode = models.CharField(verbose_name="商品二维码",default='',max_length=255)
+
     gdsellnum = models.IntegerField(verbose_name="商品售出数量",default=0)
     gdstatus = models.CharField(verbose_name="状态,0-正常,1-下架",default='0',max_length=1)
 
@@ -84,10 +88,12 @@ class Goods(models.Model):
     product = models.TextField(default="")
     shbz = models.TextField(default="")
 
+
     def save(self, *args, **kwargs):
 
         if not self.gdid:
             self.gdid = idGenerator.goods()
+            self.qrcode = get_qrcode_wechat(self.gdid)
 
         if not self.createtime:
             self.createtime = UtilTime().timestamp

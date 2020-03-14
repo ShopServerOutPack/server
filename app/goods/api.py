@@ -105,7 +105,6 @@ class GoodsAPIView(viewsets.ViewSet):
     @Core_connector(isTransaction=True,isTicket=True,isPasswd=True)
     def delGoodsCategory(self,request,*args, **kwargs):
 
-        print(request.data_format)
         GoodsCateGory.objects.filter(gdcgid=request.data_format.get('gdcgid')).delete()
 
         RedisCaCheHandler(

@@ -17,7 +17,6 @@ def send_request_other(url, method='get', params=None, data=None ,headers={}):
         result = request(method, url, params=params, json =data, verify=False,headers=headers)
         status_code = result.status_code
         result = result.json()
-        print(result)
         if str(status_code) == '200':
             return result
     except Exception as ex:

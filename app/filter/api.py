@@ -107,13 +107,12 @@ class FilterAPIView(viewsets.ViewSet):
             rdata['newgoods'] = rdata['newgoods'][:len(rdata['newgoods'])]
         rdata['newgoods'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
-        print(rdata)
         return {"data": rdata}
 
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True)
     def getGoods(self,request):
-        print(request.query_params_format.get('gdid'))
+
         res = RedisCaCheHandler(
             method="get",
             serialiers="GoodsModelSerializerToRedis",
@@ -147,7 +146,7 @@ class FilterAPIView(viewsets.ViewSet):
             table="goodstheme",
             must_key_value=request.query_params_format.get('typeid')
         ).run()
-        print(obj)
+
         if obj['status']=='0':
             goods = []
             for gdid in json.loads(obj['goods'])['goods']:
@@ -157,7 +156,7 @@ class FilterAPIView(viewsets.ViewSet):
                     table="goods",
                     must_key_value=gdid
                 ).run()
-                print(res)
+
                 if res['gdstatus'] == '0':
                     goods.append(dict(
                         gdid=res['gdid'],
@@ -167,7 +166,7 @@ class FilterAPIView(viewsets.ViewSet):
                         sort = res['sort']
                     ))
             goods.sort(key=lambda k: (k.get('sort', 0)), reverse=False)
-            print(goods)
+
             return {"data":goods}
         else:
             return {"data":False}
@@ -239,7 +238,7 @@ class FilterAPIView(viewsets.ViewSet):
         ).run() ]
 
         obj.sort(key=lambda k: (k.get('sort', 0)), reverse=False)
-        print(obj)
+
         return {"data":obj}
 
 

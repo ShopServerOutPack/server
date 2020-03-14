@@ -53,7 +53,6 @@ class RedisCaCheHandler(RedisCaCheHandlerBase):
         if not self.res:
             self.res=[]
 
-        print(self.res)
         #特殊处理字段
         createtime = self.filter_value.pop('createtime') if self.filter_value.get('createtime') else None
 

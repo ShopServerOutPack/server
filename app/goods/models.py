@@ -94,12 +94,12 @@ class Goods(models.Model):
 
         if not self.gdid:
             self.gdid = idGenerator.goods()
-            # self.qrcode = get_qrcode_wechat(self.gdid)
+            self.qrcode = get_qrcode_wechat(self.gdid)
 
         if not self.createtime:
             self.createtime = UtilTime().timestamp
         self.updtime = UtilTime().timestamp
-        self.qrcode = get_qrcode_wechat(self.gdid)
+        # self.qrcode = get_qrcode_wechat(self.gdid)
         return super(Goods, self).save(*args, **kwargs)
 
     class Meta:

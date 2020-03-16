@@ -146,7 +146,7 @@ class GoodsAPIView(viewsets.ViewSet):
             must_key="gdid",
         ).run()
 
-        return {"data":{"gdid":obj.gdid}}
+        return {"data":{"gdid":obj.gdid,"qrcode":obj.qrcode}}
 
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True,isTicket=True,isPagination=True)

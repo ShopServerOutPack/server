@@ -146,7 +146,7 @@ class GoodsAPIView(viewsets.ViewSet):
             must_key="gdid",
         ).run()
 
-        return None
+        return {"gdid":obj.gdid}
 
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True,isTicket=True,isPagination=True)

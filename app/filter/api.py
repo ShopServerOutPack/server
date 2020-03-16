@@ -130,7 +130,8 @@ class FilterAPIView(viewsets.ViewSet):
                     detail = res['detail'],
                     product = res['product'],
                     shbz = res['shbz'],
-                    qrcode = res['qrcode']
+                    qrcode = res['qrcode'],
+                    hb=res['hb']
                 )
             }
         else:

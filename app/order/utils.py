@@ -118,12 +118,14 @@ class wechatPay(object):
 
                 user = Users.objects.select_for_update().get(userid=order.userid)
 
-                updBalList(user,order,order.amount - user.bal,user.bal,user.bal,"微信支付")
+                if order.payamount>0.0:
+                    updBalList(user,order,order.payamount,user.bal,user.bal,"微信支付")
+
                 if order.balamount>0.0:
                     tmp = user.bal
                     user.bal -= order.balamount
                     user.save()
-                    updBalList(user, order, tmp, tmp, user.bal, "余额支付")
+                    updBalList(user, order, order.balamount, tmp, user.bal, "余额支付")
             else:
                 raise Exception("error")
         else:
@@ -163,13 +165,15 @@ class wechatPay(object):
                 order.save()
 
                 user = Users.objects.select_for_update().get(userid=order.userid)
-                updBalList(user,order,order.amount,user.bal,user.bal,"微信支付")
+
+                if order.payamount>0.0:
+                    updBalList(user,order,order.payamount,user.bal,user.bal,"微信支付")
 
                 if order.balamount>0.0:
                     tmp = user.bal
                     user.bal -= order.balamount
                     user.save()
-                    updBalList(user, order, order.amount, tmp, user.bal, "余额支付")
+                    updBalList(user, order, order.balamount, tmp, user.bal, "余额支付")
                 return {"data": True}
             else:
                 return {"data":False}

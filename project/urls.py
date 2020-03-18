@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from project.settings import STATIC_PATH
 
 urlpatterns = [
-    path('v1/api/', include('app.urls')),
+    path('v2/api/', include('app.urls')),
 ]
 
 urlpatterns += static('/statics/',document_root=STATIC_PATH)

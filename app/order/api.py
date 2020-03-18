@@ -220,6 +220,9 @@ class OrderAPIView(viewsets.ViewSet):
                 order.balamount = user.bal
                 order.payamount = amount
                 order.save()
+        else:
+            order.payamount = amount
+            order.save()
         print(amount)
         #request.META.get("HTTP_X_REAL_IP"),
         data = wechatPay().request({

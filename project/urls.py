@@ -16,9 +16,12 @@ Including another URLconf
 from django.urls import path,include
 from django.conf.urls.static import static
 from project.settings import STATIC_PATH
+from project.config_include.params import VERSION
 
 urlpatterns = [
-    path('v2/api/', include('app.urls')),
+    path('{}/api/'.format(VERSION), include('app.urls')),
 ]
+
+print('{}/api/'.format(VERSION))
 
 urlpatterns += static('/statics/',document_root=STATIC_PATH)

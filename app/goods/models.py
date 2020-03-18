@@ -124,6 +124,7 @@ class GoodsTheme(models.Model):
     status = models.CharField(max_length=1, default="1",verbose_name="是否上架,0-是,1-否",null=True,blank=True)
     goods = models.TextField(verbose_name="商品ID集合",default="goods:[]",blank=True)
     url = models.CharField(max_length=255,default="",blank=True)
+    url1 = models.CharField(max_length=255,default="",blank=True)
     createtime = models.BigIntegerField(default=0,blank=True)
     updtime = models.BigIntegerField(default=0,blank=True)
 

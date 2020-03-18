@@ -53,7 +53,8 @@ class FilterAPIView(viewsets.ViewSet):
             typeid = item['typeid'],
             name = item['name'],
             sort = item['sort'],
-            url  = item['url']
+            url  = item['url'],
+            url1 = item['url1']
         ) for item in RedisCaCheHandler(
             method="filter",
             serialiers="GoodsThemeModelSerializerToRedis",
@@ -68,7 +69,8 @@ class FilterAPIView(viewsets.ViewSet):
             typeid = item['typeid'],
             name = item['name'],
             sort = item['sort'],
-            url  = item['url']
+            url  = item['url'],
+            url1=item['url1']
         ) for item in RedisCaCheHandler(
             method="filter",
             serialiers="GoodsThemeModelSerializerToRedis",

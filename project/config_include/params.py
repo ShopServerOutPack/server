@@ -10,7 +10,7 @@ import os
 import os
 
 BASEURL = os.getenv("BASEURL","http://localhost:9006")
-VERSION = os.getenv("VERSION","v2")
+VERSION = os.getenv("VERSION","v1")
 APIURL = "{}/{}{}".format(BASEURL,VERSION,"/api")
 CALLBACKURL = "{}{}".format(APIURL,"/order/txPayCallback")
 

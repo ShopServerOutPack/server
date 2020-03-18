@@ -401,4 +401,19 @@ class OrderAPIView(viewsets.ViewSet):
 
         return None
 
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
+    def orderUpdAddress(self,request):
+        print(request.data_format.get("orderid"))
+
+        orderid = request.data_format.get("orderid")
+        memo = request.data_format.get("memo")
+        try:
+            obj = Order.objects.get(orderid=orderid)
+            obj.memo = memo
+            obj.save()
+        except Order.DoesNotExist:
+            raise PubErrorCustom("订单不存在!")
+        return None
+
 

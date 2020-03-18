@@ -10,8 +10,12 @@ import os
 import os
 
 BASEURL = os.getenv("BASEURL","http://localhost:9006")
-APIURL = "{}{}".format(BASEURL,"/v1/api")
+VERSION = os.getenv("VERSION","v2")
+APIURL = "{}/{}{}".format(BASEURL,VERSION,"/api")
 CALLBACKURL = "{}{}".format(APIURL,"/order/txPayCallback")
+
+
+print(CALLBACKURL)
 
 #小程序
 WECHAT_APPID = os.getenv("WECHAT_APPID","")

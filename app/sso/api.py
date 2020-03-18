@@ -21,6 +21,8 @@ from app.idGenerator import idGenerator
 
 from project.config_include.params import WECHAT_SECRET,WECHAT_APPID
 
+from app.public.models import Sysparams
+
 class SsoAPIView(viewsets.ViewSet):
 
     @list_route(methods=['POST'])
@@ -60,7 +62,8 @@ class SsoAPIView(viewsets.ViewSet):
             "user" : data,
             "session_key":wechat_res.get("session_key"),
             "token":token,
-            "address":address
+            "address":address,
+            "hylogo":Sysparams.objects.get().url
         }}
 
     @list_route(methods=['POST'])

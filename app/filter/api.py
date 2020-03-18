@@ -14,6 +14,7 @@ from app.order.serialiers import AddressModelSerializer
 
 from lib.utils.db import RedisTokenHandler
 
+
 class FilterAPIView(viewsets.ViewSet):
 
     @list_route(methods=['GET'])
@@ -36,6 +37,7 @@ class FilterAPIView(viewsets.ViewSet):
             "category_tj": [],
             "newgoods":[]
         }
+
 
         #轮播图数据
         rdata['banners'] = [ dict(

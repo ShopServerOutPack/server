@@ -18,8 +18,8 @@ CALLBACKURL = "{}{}".format(APIURL,"/order/txPayCallback")
 print(CALLBACKURL)
 
 #小程序
-WECHAT_APPID = os.getenv("WECHAT_APPID","wx6f3ddfe659c7b51f")
-WECHAT_SECRET = os.getenv("WECHAT_SECRET","1c1b4c3693011d878a732dffe13222d0")
+WECHAT_APPID = os.getenv("WECHAT_APPID","")
+WECHAT_SECRET = os.getenv("WECHAT_SECRET","")
 WECHAT_PAY_MCHID = os.getenv("WECHAT_PAY_MCHID",None)
 WECHAT_PAY_KEY = os.getenv("WECHAT_PAY_KEY",None)
 WECHAT_PAY_RETURN_KEY = os.getenv("WECHAT_PAY_RETURN_KEY",None)

@@ -113,8 +113,6 @@ class OrderAPIView(viewsets.ViewSet):
                 isvirtual = '1'
 
             orderObj.linkid['linkids'].append(link.linkid)
-            print(orderObj.amount,link.gdprice,link.gdnum)
-            print(type(orderObj.amount),type(link.gdprice),type(link.gdnum))
             orderObj.amount += link.gdprice * int(link.gdnum)
 
         orderObj.isvirtual = isvirtual
@@ -279,7 +277,6 @@ class OrderAPIView(viewsets.ViewSet):
         order.balamount = 0.0
         order.payamount = 0.0
 
-        print(request.data_format.get('usebal'))
         if request.data_format.get('usebal'):
             if user.bal >= amount:
                 tmp = user.bal
@@ -422,7 +419,6 @@ class OrderAPIView(viewsets.ViewSet):
     def cardCz(self,request):
 
         rUser=None
-        print(request.data_format)
         account = request.data_format['account']
         password = request.data_format['password']
 
@@ -474,7 +470,6 @@ class OrderAPIView(viewsets.ViewSet):
     def thmCz(self,request):
 
         rUser=None
-        print(request.data_format)
         account = request.data_format['account']
 
         try:
@@ -505,7 +500,6 @@ class OrderAPIView(viewsets.ViewSet):
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
     def orderFh(self,request):
-        print(request.data_format.get("orders"))
         orders = Order.objects.filter(orderid__in=request.data_format.get("orders"))
         for item in orders:
             item.fhstatus = '0'
@@ -516,7 +510,6 @@ class OrderAPIView(viewsets.ViewSet):
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
     def orderUpdAddress(self,request):
-        print(request.data_format.get("orderid"))
 
         orderid = request.data_format.get("orderid")
         memo = request.data_format.get("memo")

@@ -15,7 +15,6 @@ APIURL = "{}/{}{}".format(BASEURL,VERSION,"/api")
 CALLBACKURL = "{}{}".format(APIURL,"/order/txPayCallback")
 
 
-print(CALLBACKURL)
 
 #小程序
 WECHAT_APPID = os.getenv("WECHAT_APPID","")

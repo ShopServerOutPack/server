@@ -34,7 +34,6 @@ class SsoAPIView(viewsets.ViewSet):
             secret=WECHAT_SECRET,
             grant_type="authorization_code",
         )
-        print(params)
         wechat_res = send_request_other(
             url="https://api.weixin.qq.com/sns/jscode2session",
             params=params)

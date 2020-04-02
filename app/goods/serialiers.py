@@ -25,6 +25,7 @@ class GoodsModelSerializer(serializers.ModelSerializer):
 
 class GoodsForSearchSerializer(serializers.Serializer):
 
+    gdid = serializers.CharField()
     gdname = serializers.CharField()
     gdprice = serializers.DecimalField(max_digits=16,decimal_places=2)
     gdimg = serializers.CharField()

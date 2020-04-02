@@ -25,7 +25,6 @@ class GoodsAPIView(viewsets.ViewSet):
         :param request:
         :return:
         """
-        print(request.data_format)
         try:
             user = Users.objects.get(userid=request.user.get("userid"))
             user.isvip = 1
@@ -89,7 +88,6 @@ class GoodsAPIView(viewsets.ViewSet):
                     must_key_value=gdid
                 ).run())
             item['goods'] = goods
-        print(obj)
         return {"data":obj}
 
     @list_route(methods=['GET'])
@@ -279,7 +277,6 @@ class GoodsAPIView(viewsets.ViewSet):
                     must_key_value=gdid
                 ).run())
             item['goods'] = goods
-        print(obj)
         return {"data": obj}
 
     @list_route(methods=['POST'])

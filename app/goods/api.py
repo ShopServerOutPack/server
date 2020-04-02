@@ -7,6 +7,8 @@ from lib.core.decorator.response import Core_connector
 from app.user.models import Users
 from lib.utils.exceptions import PubErrorCustom
 
+from app.user.models import Role
+
 from app.cache.utils import RedisCaCheHandler
 from lib.utils.db import RedisCaCheHandlerBase
 from app.goods.models import GoodsCateGory,Goods,GoodsTheme,Card,Cardvirtual,DeliveryCode
@@ -73,9 +75,11 @@ class GoodsAPIView(viewsets.ViewSet):
             method="filter",
             serialiers="GoodsCateGoryModelSerializerToRedis",
             table="goodscategory",
-            filter_value=request.query_params_format
+            filter_value=request.query_params_format.get("filter_value",{}),
+            condition_params=request.query_params_format.get("condition_params",[]),
         ).run()
         for item in obj:
+            item['rolecode'] = json.loads(item['rolecode'])['rolecode']
             goods=[]
             for gdid in json.loads(item['goods'])['goods']:
                 goods.append(RedisCaCheHandler(
@@ -159,7 +163,9 @@ class GoodsAPIView(viewsets.ViewSet):
                             "account":account,
                             "userid": request.user.get('userid'),
                             "bal": request.data_format.get("thm").get("bal",0.0),
-                            "gdid": obj.gdid
+                            "gdid": obj.gdid,
+                            "rolecode":request.data_format.get("thm").get("rolecode",""),
+                            "rolename":Role.objects.get(rolecode=request.data_format.get("thm").get("rolecode","")).name
                         })
 
         RedisCaCheHandler(
@@ -175,10 +181,13 @@ class GoodsAPIView(viewsets.ViewSet):
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True,isTicket=True,isPagination=True)
     def getDeliveryCode(self,request,*args, **kwargs):
-
+        print(request.query_params_format)
         queryObj = DeliveryCode.objects.filter(gdid=request.query_params_format.get("gdid"))
 
-        return {"data": DeliveryCodeModelSerializer(queryObj,many=True).data}
+        if request.query_params_format.get("rolecode",None):
+            queryObj = queryObj.filter(rolecode=request.query_params_format.get("rolecode",None))
+
+        return {"data": DeliveryCodeModelSerializer(queryObj.order_by('-createtime'),many=True).data}
 
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True,isTicket=True,isPagination=True)
@@ -251,13 +260,16 @@ class GoodsAPIView(viewsets.ViewSet):
     @Core_connector(isPasswd=True, isTicket=True, isPagination=True)
     def getGoodsTheme(self, request, *args, **kwargs):
 
+        print(request.query_params_format.get("filter_value",{}))
         obj = RedisCaCheHandler(
             method="filter",
             serialiers="GoodsThemeModelSerializerToRedis",
             table="goodstheme",
-            filter_value=request.query_params_format
+            filter_value=request.query_params_format.get("filter_value",{}),
+            condition_params=request.query_params_format.get("condition_params",[]),
         ).run()
         for item in obj:
+            item['rolecode'] = json.loads(item['rolecode'])['rolecode']
             goods = []
             for gdid in json.loads(item['goods'])['goods']:
                 goods.append(RedisCaCheHandler(

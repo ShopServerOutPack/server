@@ -17,7 +17,8 @@ class RedisCaCheHandler(RedisCaCheHandlerBase):
         #查询时过滤字段
         self.filter_params = list(set(['google_token','passwd','pay_passwd'] + kwargs.get('filter_params',[])))
         #带条件查询字段
-        self.condition_params = list(set([] + kwargs.get('condition_params',[])))
+        self.condition_params = kwargs.get('condition_params',[])
+
         #请求的值
         self.filter_value = kwargs.get('filter_value') if kwargs.get('filter_value') else {}
 
@@ -75,26 +76,27 @@ class RedisCaCheHandler(RedisCaCheHandlerBase):
 
             #带条件查询字段
             for item in self.condition_params:
-                rValue = self.filter_value.pop(item[0]) if self.filter_value.get(item[0], None) else None
+                rValue = self.filter_value[item[0]] if self.filter_value.get(item[0], None) else None
 
                 if item[1] == 'like':
-                    if rValue and item in str(self.res.get(key)) and str(rValue) not in str(self.res.get(key).get(item)) :
+                    if rValue and item[0] in str(self.res.get(key)) and str(rValue) not in str(self.res.get(key).get(item[0])) :
                         isOk = False
                         break
+
                 elif item[1] == '>':
-                    if rValue and item in str(self.res.get(key)) and str(rValue) > str(self.res.get(key).get(item)) :
+                    if rValue and item[0] in str(self.res.get(key)) and str(rValue) > str(self.res.get(key).get(item[0])):
                         isOk = False
                         break
                 elif item[1] == '>=':
-                    if rValue and item in str(self.res.get(key)) and str(rValue) >= str(self.res.get(key).get(item)) :
+                    if rValue and item[0] in str(self.res.get(key)) and str(rValue) >= str(self.res.get(key).get(item[0])):
                         isOk = False
                         break
                 elif item[1] == '<':
-                    if rValue and item in str(self.res.get(key)) and str(rValue) < str(self.res.get(key).get(item)) :
+                    if rValue and item[0] in str(self.res.get(key)) and str(rValue) < str(self.res.get(key).get(item[0])):
                         isOk = False
                         break
                 elif item[1] == '<=':
-                    if rValue and item in str(self.res.get(key)) and str(rValue) <= str(self.res.get(key).get(item)) :
+                    if rValue and item[0] in str(self.res.get(key)) and str(rValue) <= str(self.res.get(key).get(item[0])):
                         isOk = False
                         break
                 else:
@@ -104,6 +106,14 @@ class RedisCaCheHandler(RedisCaCheHandlerBase):
 
             #其他查询字段
             for item in self.filter_value:
+                isOkQuery = False
+                for i in self.condition_params:
+                    if item == i[0]:
+                        isOkQuery=True
+                        break
+                if isOkQuery:
+                    continue
+
                 rValue = self.filter_value.get(item,None)
                 if rValue and item in str(self.res.get(key)) and str(rValue) != str(self.res.get(key).get(item)) :
                     isOk = False

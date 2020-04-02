@@ -10,6 +10,8 @@ from lib.utils.db import RedisCaCheHandlerCitySheng,RedisCaCheHandlerCityShi,Red
 from app.cache.utils import RedisCaCheHandler
 
 from app.order.models import Address
+from app.goods.models import Goods
+from app.goods.serialiers import GoodsForSearchSerializer
 from app.order.serialiers import AddressModelSerializer
 
 from lib.utils.db import RedisTokenHandler
@@ -65,7 +67,8 @@ class FilterAPIView(viewsets.ViewSet):
             method="filter",
             serialiers="GoodsThemeModelSerializerToRedis",
             table="goodstheme",
-            filter_value={"status":"0","type":"0","rolecode":rolecode if rolecode else '4001'}
+            filter_value={"status":"0","type":"0","rolecode":str(rolecode) if rolecode else '4001'},
+            condition_params=[['rolecode','like']]
         ).run() ]
         rdata['category_hot'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
@@ -80,7 +83,8 @@ class FilterAPIView(viewsets.ViewSet):
             method="filter",
             serialiers="GoodsThemeModelSerializerToRedis",
             table="goodstheme",
-            filter_value={"status":"0","type":"2","rolecode":rolecode if rolecode else '4001'}
+            filter_value={"status":"0","type":"2","rolecode":str(rolecode) if rolecode else '4001'},
+            condition_params=[['rolecode','like']]
         ).run() ]
         rdata['category_hot1'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
@@ -96,7 +100,8 @@ class FilterAPIView(viewsets.ViewSet):
             method="filter",
             serialiers="GoodsThemeModelSerializerToRedis",
             table="goodstheme",
-            filter_value={"status":"0","type":"1","rolecode":rolecode if rolecode else '4001'}
+            filter_value={"status":"0","type":"1","rolecode":str(rolecode) if rolecode else '4001'},
+            condition_params=[['rolecode','like']]
         ).run() ]
         rdata['category_tj'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
@@ -115,7 +120,8 @@ class FilterAPIView(viewsets.ViewSet):
                 table="goodscategory",
                 must_key_value=item.get('gdcgid')
             ).run()
-            if str(obj['rolecode']) == str(rolecode) or str(obj['rolecode']) == '4001':
+
+            if obj and (str(rolecode) in obj['rolecode']  or '4001' in  obj['rolecode']) :
                 rdata['newgoods'].append(dict(
                     gdid=item['gdid'],
                     gdname=item['gdname'],
@@ -203,6 +209,31 @@ class FilterAPIView(viewsets.ViewSet):
 
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True)
+    def getGoodsForSearch(self,request):
+
+        rolecode = None
+
+        ticket = request.META.get('HTTP_TICKET')
+        if ticket:
+            result = RedisTokenHandler(key=ticket).redis_dict_get()
+            if result:
+                rolecode = str(result.get("rolecode"))
+
+        print("角色:[%s]" % rolecode)
+        print(request.query_params_format)
+        query = """
+            SELECT t1.* FROM goods as t1
+            INNER JOIN goodscategory as t2  ON t1.gdcgid = t2.gdcgid and t2.status = '0' and t1.gdstatus='0' and t2.rolecode like '%%{}%%'
+            WHERE 1=1  and t1.gdname like '%%{}%%' order by t1.sort
+        """.format(rolecode if rolecode else '4001',request.query_params_format.get("name",""))
+        print(query)
+        goodsObj = Goods.objects.raw(query)
+
+        return {"data":GoodsForSearchSerializer(goodsObj,many=True).data}
+
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True)
     def getGoodsForCategory(self,request):
 
 
@@ -265,7 +296,8 @@ class FilterAPIView(viewsets.ViewSet):
             method="filter",
             serialiers="GoodsCateGoryModelSerializerToRedis",
             table="goodscategory",
-            filter_value={"status":"0","rolecode":rolecode if rolecode else '4001'}
+            filter_value={"status":"0","rolecode":str(rolecode) if rolecode else '4001'},
+            condition_params=[['rolecode','like']]
         ).run() ]
 
         obj.sort(key=lambda k: (k.get('sort', 0)), reverse=False)

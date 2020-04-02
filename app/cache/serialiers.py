@@ -1,4 +1,5 @@
 
+import json
 from rest_framework import serializers
 
 from lib.utils.mytime import UtilTime
@@ -58,10 +59,13 @@ class GoodsCateGoryModelSerializerToRedis(serializers.ModelSerializer):
     rolename = serializers.SerializerMethodField()
 
     def get_rolename(self,obj):
-        try:
-            return Role.objects.get(rolecode=obj.rolecode).name
-        except Role.DoesNotExist:
-            return ""
+        t =[]
+        s = Role.objects.filter(rolecode__in=json.loads(obj.rolecode)['rolecode'])
+        if s.exists:
+            for item in s:
+                t.append(item.name)
+
+        return t
 
     def get_status_format(self,obj):
         return '是' if obj.status == '0' else '否'
@@ -80,11 +84,14 @@ class GoodsThemeModelSerializerToRedis(serializers.ModelSerializer):
 
     rolename = serializers.SerializerMethodField()
 
-    def get_rolename(self, obj):
-        try:
-            return Role.objects.get(rolecode=obj.rolecode).name
-        except Role.DoesNotExist:
-            return ""
+    def get_rolename(self,obj):
+        t =[]
+        s = Role.objects.filter(rolecode__in=json.loads(obj.rolecode)['rolecode'])
+        if s.exists:
+            for item in s:
+                t.append(item.name)
+
+        return t
 
     def get_status_format(self,obj):
         return '是' if obj.status == '0' else '否'

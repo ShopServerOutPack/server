@@ -50,7 +50,7 @@ class OrderGoodsLink(models.Model):
     virtualids = models.CharField(max_length=2048,verbose_name="卡密集合",default='{"ids":[]}')
 
     thm = models.CharField(max_length=1,verbose_name="是否提货码商品:0-是,1-否",default='1')
-    thms = models.CharField(max_length=255,verbose_name="提货码",default='{"thms":[]}')
+    thms = models.CharField(max_length=2048,verbose_name="提货码",default='{"thms":[]}')
     gdprice = models.DecimalField(max_digits=18,decimal_places=6,default=0.000,verbose_name="商品价格")
     gdnum  = models.IntegerField(verbose_name="商品数量",default=0)
 

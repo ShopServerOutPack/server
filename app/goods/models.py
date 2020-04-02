@@ -22,7 +22,7 @@ class GoodsCateGory(models.Model):
     gdcglastid = models.IntegerField(verbose_name="上级代码",default=0)
 
     goods = models.TextField(verbose_name="商品ID集合",default="goods:[]",blank=True)
-    rolecode = models.CharField(max_length=4, default='', verbose_name="商品对应的用户类型")
+    rolecode = models.CharField(max_length=255, default='', verbose_name="商品对应的用户类型")
 
     level = models.IntegerField(verbose_name="第几层",default=1,blank=True)
     sort = models.IntegerField(verbose_name="排序",default=0,blank=True)
@@ -121,7 +121,7 @@ class GoodsTheme(models.Model):
     type = models.CharField(max_length=1,default="0",verbose_name="0-热门分类,1-推荐分类,2-热门分类1",blank=True)
     name = models.CharField(max_length=120, default="",verbose_name="分类名称",null=True,blank=True)
     sort = models.IntegerField(verbose_name="排序",default=0,blank=True)
-    rolecode = models.CharField(max_length=4, default='', verbose_name="商品对应的用户类型")
+    rolecode = models.CharField(max_length=255, default='', verbose_name="商品对应的用户类型")
     status = models.CharField(max_length=1, default="1",verbose_name="是否上架,0-是,1-否",null=True,blank=True)
     goods = models.TextField(verbose_name="商品ID集合",default="goods:[]",blank=True)
     url = models.CharField(max_length=255,default="",blank=True)
@@ -240,6 +240,9 @@ class DeliveryCode(models.Model):
 
     account = models.CharField(verbose_name="卡号",max_length=60,default="")
     password = models.CharField(verbose_name="密码",max_length=60,default="")
+
+    rolecode = models.CharField(max_length=4, default='',verbose_name="发卡企业")
+    rolename = models.CharField(max_length=60,default="",verbose_name="企业名称")
 
     createtime = models.BigIntegerField(default=0,blank=True)
     updtime = models.BigIntegerField(default=0,blank=True)

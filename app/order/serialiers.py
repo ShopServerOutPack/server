@@ -53,11 +53,16 @@ class OrderModelSerializer(serializers.ModelSerializer):
     payamount = serializers.DecimalField(max_digits=16,decimal_places=2)
     balamount = serializers.DecimalField(max_digits=16,decimal_places=2)
 
+    isthm_format = serializers.SerializerMethodField()
+
     createtime_format = serializers.SerializerMethodField()
 
     fhstatus_format = serializers.SerializerMethodField()
 
     address = serializers.SerializerMethodField()
+
+    def get_isthm_format(self,obj):
+        return '是' if obj.isthm=='0' else '否'
 
     def get_createtime_format(self,obj):
         return UtilTime().timestamp_to_string(obj.createtime)

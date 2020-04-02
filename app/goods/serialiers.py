@@ -23,6 +23,13 @@ class GoodsModelSerializer(serializers.ModelSerializer):
         model = Goods
         fields = '__all__'
 
+class GoodsForSearchSerializer(serializers.Serializer):
+
+    gdname = serializers.CharField()
+    gdprice = serializers.DecimalField(max_digits=16,decimal_places=2)
+    gdimg = serializers.CharField()
+    gdtext = serializers.CharField()
+
 
 class CardModelSerializer(serializers.ModelSerializer):
 

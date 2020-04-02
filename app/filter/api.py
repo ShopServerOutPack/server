@@ -121,7 +121,7 @@ class FilterAPIView(viewsets.ViewSet):
                 must_key_value=item.get('gdcgid')
             ).run()
 
-            if obj and (str(rolecode) in obj['rolecode']  or '4001' in  obj['rolecode']) :
+            if obj and (str(rolecode) in obj['rolecode']  or '4001' in  obj['rolecode']) and obj['status']=='0':
                 rdata['newgoods'].append(dict(
                     gdid=item['gdid'],
                     gdname=item['gdname'],

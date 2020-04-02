@@ -487,15 +487,24 @@ class OrderAPIView(viewsets.ViewSet):
         tmp = user.bal
         user.bal += card.bal
 
+        if card.rolecode == user.rolecode:
+            flag = False
+        else:
+            request.user['rolecode'] = card.rolecode
+            RedisTokenHandler(key=request.ticket).redis_dict_set(request.user)
+            rUser =  UsersSerializers(user, many=False).data
+            flag = True
+
         updBalList(user=user, order=None, amount=card.bal, bal=tmp, confirm_bal=user.bal, memo="提货码充值",cardno=card.account)
 
+        user.rolecode = card.rolecode
         user.save()
 
         card.useuserid = user.userid
         card.status = '0'
         card.save()
 
-        return {"data":{"a":True,"rUser":rUser}}
+        return {"data":{"a":True,"b":flag,"rUser":rUser}}
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)

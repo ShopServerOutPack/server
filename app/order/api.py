@@ -283,6 +283,8 @@ class OrderAPIView(viewsets.ViewSet):
             else:
                 raise PubErrorCustom("暂无存货!")
 
+        rUser = None
+
         if thmObj.rolecode == user.rolecode:
             flag = False
         else:

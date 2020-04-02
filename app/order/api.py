@@ -148,6 +148,48 @@ class OrderAPIView(viewsets.ViewSet):
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
+    def thmCz(self,request):
+
+        rUser=None
+        account = request.data_format['account']
+
+        try:
+            user = Users.objects.select_for_update().get(userid=request.user['userid'])
+        except Users.DoesNotExist:
+            raise PubErrorCustom("用户非法!")
+
+        try:
+            card = DeliveryCode.objects.select_for_update().get(account=account)
+            if card.useuserid>0:
+                return {"data": {"a": False}}
+        except DeliveryCode.DoesNotExist:
+            return {"data":False}
+
+
+        tmp = user.bal
+        user.bal += card.bal
+
+        if card.rolecode == user.rolecode:
+            flag = False
+        else:
+            request.user['rolecode'] = card.rolecode
+            RedisTokenHandler(key=request.ticket).redis_dict_set(request.user)
+            rUser =  UsersSerializers(user, many=False).data
+            flag = True
+
+        updBalList(user=user, order=None, amount=card.bal, bal=tmp, confirm_bal=user.bal, memo="提货码充值",cardno=card.account)
+
+        user.rolecode = card.rolecode
+        user.save()
+
+        card.useuserid = user.userid
+        card.status = '0'
+        card.save()
+
+        return {"data":{"a":True,"b":flag,"rUser":rUser}}
+
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
     def OrderPayByThm(self, request):
 
         thms = request.data_format.get("thms",[])
@@ -158,14 +200,29 @@ class OrderAPIView(viewsets.ViewSet):
         if not len(thms):
             raise PubErrorCustom("提货码为空!")
 
+        try:
+            user = Users.objects.get(userid=request.user['userid'])
+        except Users.DoesNotExist:
+            raise PubErrorCustom("用户非法!")
+
+        thmObj = None
+
         for index,thm in enumerate(thms):
             try:
                 deli = DeliveryCode.objects.select_for_update().get(gdid=gdid,account=thm,status='1')
                 deli.useuserid = request.user['userid']
                 deli.status = '0'
                 deli.save()
+
+                if index == 0:
+                    thmObj = deli
+
             except DeliveryCode.DoesNotExist:
                 raise PubErrorCustom("提货码{}不正确".format(index+1))
+
+        if not thmObj:
+            raise PubErrorCustom("提货码为空!")
+
 
         orderObj = Order.objects.create(**dict(
             userid=request.user['userid']
@@ -226,7 +283,17 @@ class OrderAPIView(viewsets.ViewSet):
             else:
                 raise PubErrorCustom("暂无存货!")
 
-        return None
+        if thmObj.rolecode == user.rolecode:
+            flag = False
+        else:
+            request.user['rolecode'] = thmObj.rolecode
+            RedisTokenHandler(key=request.ticket).redis_dict_set(request.user)
+            rUser =  UsersSerializers(user, many=False).data
+            flag = True
+            user.rolecode = thmObj.rolecode
+            user.save()
+
+        return {"data": {"b": flag, "rUser": rUser}}
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
@@ -464,47 +531,6 @@ class OrderAPIView(viewsets.ViewSet):
 
         return {"data":{"a":True,"b":flag,"rUser":rUser}}
 
-
-    @list_route(methods=['POST'])
-    @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
-    def thmCz(self,request):
-
-        rUser=None
-        account = request.data_format['account']
-
-        try:
-            card = DeliveryCode.objects.select_for_update().get(account=account)
-            if card.useuserid>0:
-                return {"data": {"a": False}}
-        except DeliveryCode.DoesNotExist:
-            return {"data":False}
-        try:
-            user = Users.objects.select_for_update().get(userid=request.user['userid'])
-        except Users.DoesNotExist:
-            raise PubErrorCustom("用户非法!")
-
-
-        tmp = user.bal
-        user.bal += card.bal
-
-        if card.rolecode == user.rolecode:
-            flag = False
-        else:
-            request.user['rolecode'] = card.rolecode
-            RedisTokenHandler(key=request.ticket).redis_dict_set(request.user)
-            rUser =  UsersSerializers(user, many=False).data
-            flag = True
-
-        updBalList(user=user, order=None, amount=card.bal, bal=tmp, confirm_bal=user.bal, memo="提货码充值",cardno=card.account)
-
-        user.rolecode = card.rolecode
-        user.save()
-
-        card.useuserid = user.userid
-        card.status = '0'
-        card.save()
-
-        return {"data":{"a":True,"b":flag,"rUser":rUser}}
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)

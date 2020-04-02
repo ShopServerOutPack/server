@@ -18,7 +18,7 @@ from app.user.serialiers import UsersSerializers
 from app.order.serialiers import OrderModelSerializer,AddressModelSerializer,OrderGoodsLinkModelSerializer
 from app.order.models import Address
 
-from app.goods.models import Card,Cardvirtual
+from app.goods.models import Card,Cardvirtual,DeliveryCode
 
 from app.order.utils import wechatPay
 from lib.utils.db import RedisTokenHandler
@@ -112,8 +112,6 @@ class OrderAPIView(viewsets.ViewSet):
             if res['virtual'] != '0':
                 isvirtual = '1'
 
-
-
             orderObj.linkid['linkids'].append(link.linkid)
             print(orderObj.amount,link.gdprice,link.gdnum)
             print(type(orderObj.amount),type(link.gdprice),type(link.gdnum))
@@ -150,6 +148,87 @@ class OrderAPIView(viewsets.ViewSet):
     #     except Order.DoesNotExist:
     #         raise PubErrorCustom("订单异常!")
 
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
+    def OrderPayByThm(self, request):
+
+        thms = request.data_format.get("thms",[])
+        gdid = request.data_format.get("gdid",None)
+        memo = request.data_format.get("memo","")
+        address = json.dumps(request.data_format.get('address',{}))
+
+        if not len(thms):
+            raise PubErrorCustom("提货码为空!")
+
+        for index,thm in enumerate(thms):
+            try:
+                deli = DeliveryCode.objects.select_for_update().get(gdid=gdid,account=thm,status='1')
+                deli.useuserid = request.user['userid']
+                deli.status = '0'
+                deli.save()
+            except DeliveryCode.DoesNotExist:
+                raise PubErrorCustom("提货码{}不正确".format(index+1))
+
+        orderObj = Order.objects.create(**dict(
+            userid=request.user['userid']
+        ))
+        orderObj.linkid={"linkids":[]}
+        orderObj.amount = Decimal("0.0")
+
+        res = RedisCaCheHandler(
+            method="get",
+            table="goods",
+            must_key_value=gdid,
+        ).run()
+        if not res or res['gdstatus'] == '1':
+            raise PubErrorCustom("{}商品已下架,请在购物车删除此商品!".format(res['gdname']))
+
+        link = OrderGoodsLink.objects.create(**dict(
+            userid=request.user['userid'],
+            orderid=orderObj.orderid,
+            gdid=res['gdid'],
+            gdimg=res['gdimg'],
+            gdname=res['gdname'],
+            gdprice=Decimal(str(res['gdprice'])),
+            gdnum=len(thms),
+            thm='0',
+            thms= json.dumps({"thms":thms}),
+            virtual=res['virtual']
+        ))
+
+        orderObj.linkid['linkids'].append(link.linkid)
+        orderObj.amount += link.gdprice * int(link.gdnum)
+        orderObj.isthm = '0'
+        orderObj.address = address
+        orderObj.memo = memo
+        orderObj.status = '1'
+
+        orderObj.isvirtual = res['virtual']
+        orderObj.linkid=json.dumps(orderObj.linkid)
+        orderObj.save()
+
+        if link.virtual == '0':
+            cards = Cardvirtual.objects.filter(gdid=link.gdid, status='1').order_by('createtime')
+            if cards.exists():
+                if len(cards) < link.gdnum:
+                    raise PubErrorCustom("暂无存货!")
+
+                virtualids = json.loads(link.virtualids)
+                count = 0
+                for card in cards:
+                    count += 1
+                    virtualids['ids'].append({"id": card.id, "account": card.account, "password": card.account})
+                    card.status = '0'
+                    card.useuserid = link.userid
+                    card.save()
+                    if count == link.gdnum:
+                        break
+                link.virtualids = json.dumps(virtualids)
+                link.save()
+            else:
+                raise PubErrorCustom("暂无存货!")
+
+        return None
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
@@ -168,7 +247,7 @@ class OrderAPIView(viewsets.ViewSet):
             order.address = json.dumps(request.data_format.get('address',{}))
             order.memo = request.data_format.get("memo","")
             if order.status=='1':
-                raise PubErrorCustom("此点单已付款!")
+                raise PubErrorCustom("此订单已付款!")
         except Order.DoesNotExist:
             raise PubErrorCustom("订单异常!")
 
@@ -389,6 +468,39 @@ class OrderAPIView(viewsets.ViewSet):
 
         return {"data":{"a":True,"b":flag,"rUser":rUser}}
 
+
+    @list_route(methods=['POST'])
+    @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)
+    def thmCz(self,request):
+
+        rUser=None
+        print(request.data_format)
+        account = request.data_format['account']
+
+        try:
+            card = DeliveryCode.objects.select_for_update().get(account=account)
+            if card.useuserid>0:
+                return {"data": {"a": False}}
+        except DeliveryCode.DoesNotExist:
+            return {"data":False}
+        try:
+            user = Users.objects.select_for_update().get(userid=request.user['userid'])
+        except Users.DoesNotExist:
+            raise PubErrorCustom("用户非法!")
+
+
+        tmp = user.bal
+        user.bal += card.bal
+
+        updBalList(user=user, order=None, amount=card.bal, bal=tmp, confirm_bal=user.bal, memo="提货码充值",cardno=card.account)
+
+        user.save()
+
+        card.useuserid = user.userid
+        card.status = '0'
+        card.save()
+
+        return {"data":{"a":True,"rUser":rUser}}
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True,isTicket=True)

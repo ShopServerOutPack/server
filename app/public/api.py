@@ -8,14 +8,22 @@ from lib.utils.exceptions import PubErrorCustom
 from app.public.models import Banner,AttachMent,AttachMentGroup,OtherMemo,Sysparams
 from app.cache.utils import RedisCaCheHandler
 
+from app.public.serialiers import SysparamsModelSerializer
+
 class PublicAPIView(viewsets.ViewSet):
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True, isPasswd=True)
     def updSysparams(self, request):
 
+        form = request.data_format.get("form")
+
         obj = Sysparams.objects.get()
-        obj.url = request.data_format.get("url")
+        obj.url = form['url']
+        obj.rmflflag = form['rmflflag']
+        obj.rmfltitle = form['rmfltitle']
+        obj.newgoodsflag = form['newgoodsflag']
+        obj.newgoodstitle = form['newgoodstitle']
         obj.save()
 
         return None
@@ -26,7 +34,7 @@ class PublicAPIView(viewsets.ViewSet):
 
         obj = Sysparams.objects.get()
 
-        return {"data":{"url":obj.url}}
+        return {"data":SysparamsModelSerializer(obj,many=False).data}
 
     @list_route(methods=['POST'])
     @Core_connector(isTransaction=True,isPasswd=True)

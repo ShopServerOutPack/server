@@ -1,5 +1,5 @@
 
-import json
+import json,random
 from rest_framework import viewsets
 from rest_framework.decorators import list_route
 
@@ -9,8 +9,9 @@ from lib.utils.exceptions import PubErrorCustom
 
 from app.cache.utils import RedisCaCheHandler
 from lib.utils.db import RedisCaCheHandlerBase
-from app.goods.models import GoodsCateGory,Goods,GoodsTheme,Card,Cardvirtual
-from app.goods.serialiers import GoodsCateGoryModelSerializer,GoodsModelSerializer,GoodsThemeModelSerializer,CardModelSerializer,CardvirtualModelSerializer
+from app.goods.models import GoodsCateGory,Goods,GoodsTheme,Card,Cardvirtual,DeliveryCode
+from app.goods.serialiers import GoodsCateGoryModelSerializer,GoodsModelSerializer,\
+    GoodsThemeModelSerializer,CardModelSerializer,CardvirtualModelSerializer,DeliveryCodeModelSerializer
 
 class GoodsAPIView(viewsets.ViewSet):
 
@@ -138,6 +139,29 @@ class GoodsAPIView(viewsets.ViewSet):
                     })
         obj.save()
 
+        if obj.code == '0':
+            if request.data_format.get("thm"):
+
+                if int(request.data_format.get("thm").get("number",0))>0:
+
+                    for item in range(int(request.data_format.get("thm").get("number",0))):
+
+                        a = "0123456789abcdefghijklmnopqrstuvwxyz"
+
+                        while True:
+                            account = ""
+                            for item in range(12):
+                                account += random.choice(a)
+                            if DeliveryCode.objects.filter(account=account).count() <= 0:
+                                break
+
+                        DeliveryCode.objects.create(**{
+                            "account":account,
+                            "userid": request.user.get('userid'),
+                            "bal": request.data_format.get("thm").get("bal",0.0),
+                            "gdid": obj.gdid
+                        })
+
         RedisCaCheHandler(
             method="save",
             serialiers="GoodsModelSerializerToRedis",
@@ -147,6 +171,14 @@ class GoodsAPIView(viewsets.ViewSet):
         ).run()
 
         return {"data":{"gdid":obj.gdid,"qrcode":obj.qrcode}}
+
+    @list_route(methods=['GET'])
+    @Core_connector(isPasswd=True,isTicket=True,isPagination=True)
+    def getDeliveryCode(self,request,*args, **kwargs):
+
+        queryObj = DeliveryCode.objects.filter(gdid=request.query_params_format.get("gdid"))
+
+        return {"data": DeliveryCodeModelSerializer(queryObj,many=True).data}
 
     @list_route(methods=['GET'])
     @Core_connector(isPasswd=True,isTicket=True,isPagination=True)

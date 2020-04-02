@@ -79,6 +79,7 @@ class Goods(models.Model):
     gdstatus = models.CharField(verbose_name="状态,0-正常,1-下架",default='0',max_length=1)
 
     virtual = models.CharField(max_length=1,verbose_name="是否虚拟商品:0-是,1-否",default='1')
+    code = models.CharField(max_length=1,verbose_name="是否可以提货码购买:0-是,1-否",default='1')
     gdbrowsenum = models.IntegerField(verbose_name="商品浏览量",default=0)
 
     createtime = models.BigIntegerField(default=0)
@@ -117,7 +118,7 @@ class GoodsTheme(models.Model):
 
     userid = models.BigIntegerField(verbose_name="用户代码",null=True)
     typeid = models.CharField(max_length=10,default="",verbose_name="分类代码",null=True,blank=True)
-    type = models.CharField(max_length=1,default="0",verbose_name="0-热门分类,1-推荐分类",blank=True)
+    type = models.CharField(max_length=1,default="0",verbose_name="0-热门分类,1-推荐分类,2-热门分类1",blank=True)
     name = models.CharField(max_length=120, default="",verbose_name="分类名称",null=True,blank=True)
     sort = models.IntegerField(verbose_name="排序",default=0,blank=True)
     rolecode = models.CharField(max_length=4, default='', verbose_name="商品对应的用户类型")
@@ -223,3 +224,39 @@ class Card(models.Model):
         verbose_name = '卡片'
         verbose_name_plural = verbose_name
         db_table = 'card'
+
+class DeliveryCode(models.Model):
+
+    """
+    提货码
+    """
+
+    id = models.AutoField(primary_key=True)
+
+    userid = models.BigIntegerField(verbose_name="用户代码",null=True)
+
+    useuserid = models.BigIntegerField(verbose_name="使用用户",default=0)
+    status = models.CharField(max_length=1,verbose_name="使用状态,0-使用,1-未使用",default='1')
+
+    account = models.CharField(verbose_name="卡号",max_length=60,default="")
+    password = models.CharField(verbose_name="密码",max_length=60,default="")
+
+    createtime = models.BigIntegerField(default=0,blank=True)
+    updtime = models.BigIntegerField(default=0,blank=True)
+    bal = models.DecimalField(max_digits=18,decimal_places=6,default=0.000,verbose_name="面值")
+    gdid = models.CharField(max_length=10, verbose_name="商品ID", null=True)
+
+    username=None
+
+    def save(self, *args, **kwargs):
+
+        if not self.createtime:
+            self.createtime = UtilTime().timestamp
+            print(self.createtime)
+        self.updtime = UtilTime().timestamp
+        return super(DeliveryCode, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = '虚拟商品卡密'
+        verbose_name_plural = verbose_name
+        db_table = 'deliverycode'

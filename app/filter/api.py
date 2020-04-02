@@ -14,6 +14,8 @@ from app.order.serialiers import AddressModelSerializer
 
 from lib.utils.db import RedisTokenHandler
 
+from app.public.serialiers import SysparamsModelSerializer,Sysparams
+
 
 class FilterAPIView(viewsets.ViewSet):
 
@@ -27,15 +29,17 @@ class FilterAPIView(viewsets.ViewSet):
         if ticket:
             result = RedisTokenHandler(key=ticket).redis_dict_get()
             if result:
-                rolecode = result.get("rolecode")
+                rolecode = str(result.get("rolecode"))
 
         print("角色:[%s]"%rolecode)
 
         rdata={
             "banners":[],
             "category_hot":[],
+            "category_hot1": [],
             "category_tj": [],
-            "newgoods":[]
+            "newgoods":[],
+            "sysparams":SysparamsModelSerializer(Sysparams.objects.get(),many=False).data
         }
 
 
@@ -64,6 +68,21 @@ class FilterAPIView(viewsets.ViewSet):
             filter_value={"status":"0","type":"0","rolecode":rolecode if rolecode else '4001'}
         ).run() ]
         rdata['category_hot'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
+
+        #主题分类数据(热门)
+        rdata['category_hot1'] = [  dict(
+            typeid = item['typeid'],
+            name = item['name'],
+            sort = item['sort'],
+            url  = item['url'],
+            url1 = item['url1']
+        ) for item in RedisCaCheHandler(
+            method="filter",
+            serialiers="GoodsThemeModelSerializerToRedis",
+            table="goodstheme",
+            filter_value={"status":"0","type":"2","rolecode":rolecode if rolecode else '4001'}
+        ).run() ]
+        rdata['category_hot1'].sort(key=lambda k: (k.get('sort', 0)), reverse=False)
 
 
         #主题分类数据(推荐)
@@ -96,11 +115,12 @@ class FilterAPIView(viewsets.ViewSet):
                 table="goodscategory",
                 must_key_value=item.get('gdcgid')
             ).run()
-            if obj['rolecode'] == rolecode or obj['rolecode'] == '4001':
+            if str(obj['rolecode']) == str(rolecode) or str(obj['rolecode']) == '4001':
                 rdata['newgoods'].append(dict(
                     gdid=item['gdid'],
                     gdname=item['gdname'],
                     gdimg=item['gdimg'],
+                    gdtext=item['gdtext'],
                     gdprice=item['gdprice'],
                     sort=item['sort']
                 ))
@@ -134,6 +154,9 @@ class FilterAPIView(viewsets.ViewSet):
                     detail = res['detail'],
                     product = res['product'],
                     shbz = res['shbz'],
+                    code = res['code'],
+                    virtual = res['virtual'],
+                    gdtext=res['gdtext'],
                     qrcode = res['qrcode'],
                     hb=res['hb']
                 )
@@ -169,6 +192,7 @@ class FilterAPIView(viewsets.ViewSet):
                         gdimg=res['gdimg'],
                         gdname=res['gdname'],
                         gdprice=res['gdprice'],
+                        gdtext=res['gdtext'],
                         sort = res['sort']
                     ))
             goods.sort(key=lambda k: (k.get('sort', 0)), reverse=False)
@@ -204,7 +228,8 @@ class FilterAPIView(viewsets.ViewSet):
                     gdid=item['gdid'],
                     gdimg=item['gdimg'],
                     gdname=item['gdname'],
-                    sort=item['sort']
+                    sort=item['sort'],
+                    gdtext=item['gdtext'],
                 ))
             goods.sort(key=lambda k: (k.get('sort', 0)), reverse=False)
             return {"data":goods}
@@ -227,7 +252,7 @@ class FilterAPIView(viewsets.ViewSet):
         if ticket:
             result = RedisTokenHandler(key=ticket).redis_dict_get()
             if result:
-                rolecode = result.get("rolecode")
+                rolecode = str(result.get("rolecode"))
 
         print("角色:[%s]" % rolecode)
 

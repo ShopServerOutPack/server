@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
-from app.goods.models import GoodsCateGory,Goods,GoodsTheme,Card,Cardvirtual
+from app.goods.models import GoodsCateGory,Goods,GoodsTheme,Card,Cardvirtual,DeliveryCode
 from lib.utils.mytime import UtilTime
 
 class GoodsCateGoryModelSerializer(serializers.ModelSerializer):
@@ -43,4 +43,20 @@ class CardvirtualModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cardvirtual
+        fields = '__all__'
+
+
+class DeliveryCodeModelSerializer(serializers.ModelSerializer):
+
+    createtime_format = serializers.SerializerMethodField()
+    status_format = serializers.SerializerMethodField()
+
+    def get_status_format(self,obj):
+        return '是' if obj.status == '0' else '否'
+
+    def get_createtime_format(self,obj):
+        return UtilTime().timestamp_to_string(obj.createtime)
+
+    class Meta:
+        model = DeliveryCode
         fields = '__all__'

@@ -1,8 +1,10 @@
-from decimal import *
 
+import random
 
+a="0123456789abcdefghijklmnopqrstuvwxyz"
 
-a=Decimal(str(102.1))
-b=Decimal("102.2")
+s=""
+for item in range(12):
+    s+=random.choice(a)
 
-print(a==b)
+print(len(s))

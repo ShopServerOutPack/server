@@ -33,6 +33,10 @@ class OrderGoodsLinkModelSerializer(serializers.ModelSerializer):
 
 
     gdprice = serializers.DecimalField(max_digits=16,decimal_places=2)
+    thms = serializers.SerializerMethodField()
+
+    def get_thms(self,obj):
+        return json.loads(obj.thms)['thms'] if obj.thms else []
 
 
     class Meta:

@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import list_route
 
 from lib.core.decorator.response import Core_connector
+from lib.utils.exceptions import PubErrorCustom
 
 from app.cache.utils import RedisCaCheHandler
 from app.user.serialiers import UsersModelSerializer,RoleModelSerializer
@@ -33,10 +34,25 @@ class UserAPIView(viewsets.ViewSet):
     @list_route(methods=['GET'])
     @Core_connector(isTicket=True,isPasswd=True,isPagination=True)
     def getUser(self, request):
-        query = Users.objects.filter(rolecode__startswith='4')
+        query = Users.objects.filter(rolecode__startswith='4').order_by('-createtime')
 
         return {"data": UsersModelSerializer(query,many=True).data}
 
+    @list_route(methods=['POST'])
+    @Core_connector(isTicket=True,isPasswd=True,isTransaction=True)
+    def updPassword(self, request):
+
+        if not request.data_format.get("passwd",None):
+            raise PubErrorCustom("密码是空!")
+
+        try:
+            obj = Users.objects.get(userid=request.user['userid'])
+            obj.passwd = request.data_format['passwd']
+            obj.save()
+        except Users.DoesNotExist:
+            raise PubErrorCustom("用户不存在!")
+
+        return None
 
     @list_route(methods=['GET'])
     @Core_connector(isTicket=True,isPasswd=True,isPagination=True)

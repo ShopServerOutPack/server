@@ -87,6 +87,11 @@ class Sysparams(models.Model):
     id=models.AutoField(primary_key=True)
     url = models.CharField(max_length=255,verbose_name="加入我们的图片地址")
 
+    rmflflag = models.CharField(max_length=1,verbose_name="0-文字,1-图片")
+    rmfltitle = models.CharField(max_length=255,verbose_name="热门分类title/可以是文字也可以是图片")
+
+    newgoodsflag = models.CharField(max_length=1,verbose_name="0-文字,1-图片")
+    newgoodstitle = models.CharField(max_length=255,verbose_name="新品title/可以是文字也可以是图片")
 
     class Meta:
         verbose_name = '系统参数表'

@@ -34,6 +34,8 @@ class FilterAPIView(viewsets.ViewSet):
                 rolecode = str(result.get("rolecode"))
 
         print("角色:[%s]"%rolecode)
+        if not rolecode:
+            rolecode = '4001'
 
         rdata={
             "banners":[],
@@ -121,7 +123,7 @@ class FilterAPIView(viewsets.ViewSet):
                 must_key_value=item.get('gdcgid')
             ).run()
 
-            if obj and (str(rolecode) in obj['rolecode']  or '4001' in  obj['rolecode']) and obj['status']=='0':
+            if obj and str(rolecode) in obj['rolecode'] and obj['status']=='0':
                 rdata['newgoods'].append(dict(
                     gdid=item['gdid'],
                     gdname=item['gdname'],
